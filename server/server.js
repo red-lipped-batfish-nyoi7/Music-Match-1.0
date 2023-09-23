@@ -9,19 +9,12 @@ const mongoose = require("mongoose");
 app.use(express.json());
 
 
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
 //this is basic homepage with login and signup 
 app.use('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
-
-
-
-app.use(express.static(path.join(__dirname, "../build")));
-
-
-
-
 
 
 

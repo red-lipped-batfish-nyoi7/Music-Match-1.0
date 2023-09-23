@@ -12,6 +12,9 @@ import { useHistory } from "react-router-dom";
 
 //LoginBox is a presentational component which renders LoginModal (child component)
 
+//username: iLikeTarik
+//password: iAmNine
+
 const LoginBox = () => {
     return (
         <div> 
@@ -26,9 +29,11 @@ function LoginModal() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
-    const history = useHistory();
+    // const history = useHistory();
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
         try {
             const response = await fetch('/login/verify', {
                 method: 'POST',
@@ -40,7 +45,8 @@ function LoginModal() {
 
             if (response.ok) {
                 setMessage('Login successful!');
-                history.push('/main');
+                // history.push('/main');
+                console.log('Login successful', response.body);
             } else {
                 const errorData = await response.json();
                 setMessage(`Login failed: ${errorData.message}`);

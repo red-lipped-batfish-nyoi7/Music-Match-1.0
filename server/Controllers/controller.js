@@ -39,7 +39,7 @@ controller.createUser = async function(req, res, next){
         //make sure user doesn't exist in database
 
         //console.log(req.body);
-        const { username, artists } = req.body;
+        let { username, artists } = req.body;
 
 
         const existingProfile = await Profile.findOne({username: username})
@@ -49,8 +49,8 @@ controller.createUser = async function(req, res, next){
         if (existingProfile === null){
 
             //format artists from request body
-            artists.replaceAll('\n', ' ');
-            artists.replaceAll(', ', ' ');
+            artists.replace('\n', ' ');
+            artists.replace(', ', ' ');
             artists = artists.split(' ');
             const artistObj = {}
             for(const artist of artists){
@@ -58,10 +58,10 @@ controller.createUser = async function(req, res, next){
             }
     
             const newUser = { ...req.body, artists: artistObj}
-            console.log("creating user", newUser)
+            // console.log("creating user", newUser)
             // console.log(req.body);
             const newProfile = await Profile.create(newUser);
-            res.locals.newProfile = newProfile;
+            res.locals.profile = newProfile;
             return next();
         }
         
@@ -85,10 +85,13 @@ controller.createUser = async function(req, res, next){
 
 }
 
-controller.createLoginCookie = function (req, res) {
+controller.createLoginCookie = function (req, res, next) {
+    console.log('made it to create cookie');
+    console.log(res.locals);
+
     const { _id } = res.locals.profile;
     
-    res.setcookie('login', _id);
+    res.cookie('login', _id);
 
     return next();
 }

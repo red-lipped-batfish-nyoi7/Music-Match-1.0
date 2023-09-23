@@ -18,6 +18,7 @@ app.use('/', (req, res) => {
 
 
 
+
 app.use("*", (req, res, next) => {
     return next({
       log: "Endpoint does not exist",

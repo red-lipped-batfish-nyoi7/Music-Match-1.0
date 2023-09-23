@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import SignUp from "./signup";
-
+import '../styles.scss'
 
 const App = () => {
 
     return (
-        <div>HELLO WORLD</div>
+        <div>
+            <SignUp />
+
+        </div>
     )
 }
 

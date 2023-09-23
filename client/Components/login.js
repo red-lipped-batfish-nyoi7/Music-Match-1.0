@@ -76,7 +76,7 @@ function LoginModal() {
                     onChange={(event) => setPassword(event.target.value)} />
                 </label>
             </div>
-            <button onClick={handleLogin}>Submit</button>
+            <button className='loginButton' onClick={handleLogin}>Submit</button>
             <div>{message}</div>
         </form>
     );

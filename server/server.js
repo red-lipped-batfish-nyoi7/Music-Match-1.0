@@ -8,13 +8,26 @@ app.use(cors());
 const mongoose = require("mongoose");
 app.use(express.json());
 
+//require controller
+const controller = require('./Controllers/controller');
+
+
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 //this is basic homepage with login and signup 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
+
+//verify user middleware chain
+app.post('/login/verify', controller.verifyUser, (req, res) => {
+  res.status(200).json(res.locals.profile)
+})
+
+app.post('/signup/verify', controller.createUser, (req, res) => {
+  res.status(200).json(res.locals.newProfile)
+})
 
 
 

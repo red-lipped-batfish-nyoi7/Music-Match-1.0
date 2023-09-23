@@ -31,6 +31,7 @@ app.post('/signup/verify', controller.createUser, (req, res) => {
 
 
 
+
 app.use("*", (req, res, next) => {
     return next({
       log: "Endpoint does not exist",

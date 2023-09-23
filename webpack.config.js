@@ -3,10 +3,10 @@
 
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-// const { env } = require("process");
+const { env } = require("process");
 
 module.exports = {
-  mode: 'development', //read the priocess variables
+  mode: process.env.NODE_ENV, //read the priocess variables
   entry: {
     index:
       "./client/index.js",
@@ -39,9 +39,10 @@ module.exports = {
     },
     compress: true,
     open: true,
+    hot: true,
     port: 8080,
     proxy: {
-      "/": "http://localhost:3000",
+      "/api": "http://localhost:3000/",
     },
   },
 

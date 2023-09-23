@@ -4,8 +4,8 @@
   "description": "Scratch project for Codesmith NYOI7",
   "main": "./client/index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
-    "build": "webpack",
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
     "dev": " NODE_ENV=development  nodemon server/server.js & NODE_ENV=development webpack server",
     "open": "start http://localhost:3000",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,7 @@
     "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0"
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",

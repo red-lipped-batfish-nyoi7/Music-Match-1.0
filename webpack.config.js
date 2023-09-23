@@ -1,15 +1,15 @@
 // webpack.config.js
 // const webpack = require("webpack");
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 // const { env } = require("process");
 
 module.exports = {
-  mode: development, //read the priocess variables
+  mode: 'development', //read the priocess variables
   entry: {
     index:
-      "client/index.js",
+      "./client/index.js",
   },
 
   output: {
@@ -18,13 +18,19 @@ module.exports = {
     //publicPath: '/' //used for base path for other assets
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template:
-        "client/index.html",
-    }),
+
+  // plugins: [
+  //   new HtmlWebPackPlugin({
+  //     filename: "./index.html",
+  //   }),
+  // ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template:
+  //       "client/index.html",
+  //   }),
    
-  ],
+  // ],
 
   devServer: {
     static: {
@@ -48,7 +54,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
+            presets: ["@babel/react", "@babel/env"],
           },
         },
       },

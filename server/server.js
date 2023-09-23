@@ -21,11 +21,17 @@ app.get('/', (req, res) => {
 });
 
 //verify user middleware chain
-app.post('/login/verify', controller.verifyUser, (req, res) => {
+app.post('/login/verify', 
+  controller.verifyUser, 
+  controller.createLoginCookie,
+  (req, res) => {
   res.status(200).json(res.locals.profile)
 })
 
-app.post('/signup/verify', controller.createUser, (req, res) => {
+app.post('/signup/verify', 
+  controller.createUser, 
+  controller.createLoginCookie, 
+  (req, res) => {
   res.status(200).json(res.locals.newProfile)
 })
 

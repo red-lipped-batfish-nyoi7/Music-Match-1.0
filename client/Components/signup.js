@@ -33,7 +33,7 @@ const SignUp = () => {
         console.log(res);
       });
 
-    setInputValue("");
+//    setInputValue("");
   }
 
   function handleChangeUser(e) {

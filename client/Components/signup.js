@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 const SignUp = () => {
   const [newUserName, setnewUserName] = useState([]);
   const [newPassword, setnewPassword] = useState([]);
@@ -9,32 +10,31 @@ const SignUp = () => {
   const [newName, setnewName] = useState([]);
   const [newArtists, setnewArtists] = useState([]);
 
-  function handleClick(e) {
-    e.preventDefault();
-    fetch("http://localhost:3000/signup/verify", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        username: newUserName,
-        name: newName,
-        password: newPassword,
-        age: newAge, 
-        bio: newBio,
-        artist: newArtists,
-
-      }),
-    })
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (res) {
-        console.log(res);
-      });
-
-//    setInputValue("");
+    async function handleClick(e) {
+      e.preventDefault();
+      try {
+        const response = await fetch("http://localhost:3000/signup/verify", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            username: newUserName,
+            name: newName,
+            password: newPassword,
+            age: newAge, 
+            bio: newBio,
+            artist: newArtists,
+          }),
+        });
+    
+      
+    }catch(err){
+      console.log(err);
+    }
   }
+
+  
 
   function handleChangeUser(e) {
     setnewUserName(e.target.value);
@@ -82,7 +82,7 @@ const SignUp = () => {
         </label>
         <input
           id="createPW"
-          type="text"
+          type="password"
           value={newPassword}
           onChange={handleChangePW}
         />
@@ -94,7 +94,7 @@ const SignUp = () => {
         </label>
         <input
           id="createAge"
-          type="text"
+          type="number"
           value={newAge}
           onChange={handleChangeAge}
         />

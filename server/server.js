@@ -20,6 +20,13 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 
+app.get('/main', (req, res) => {
+  res.status(200).send('hello')
+});
+
+app.get('/signup', (req, res) => {
+  res.status(200).send('hello this is signup')
+});
 //verify user middleware chain
 app.post('/login/verify', 
   controller.verifyUser, 

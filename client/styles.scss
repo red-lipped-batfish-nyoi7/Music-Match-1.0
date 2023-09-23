@@ -122,16 +122,19 @@ input {
     margin-top: 10px;
   }
 
-.login-wrapper {
+  .login-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: '100vh';
-    // border: 2px solid black;
-    // padding: 15px;
-    // margin: 10px;
-}
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100vh; /* Make the form take the full height of the viewport */
+    margin: 0 auto; /* Center the form horizontally */
+    max-width: 400px; /* Set a maximum width for the form */
+    padding: 20px; /* Add some padding for spacing */
+  }
+  
+  /* Additional styling for form elements (e.g., labels, inputs, buttons) can go here */
+  
 
 .loginButton {
   font-weight: bolder;

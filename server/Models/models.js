@@ -16,7 +16,7 @@ const profileSchema = new Schema({
     username: {type: String, required: true, unique: true},
     name: {type: String, required: true},
     password: {type: String, required: true},
-    age: {type: Number, required: true},
+    age: {type: String, required: true},
     bio: {type: String, required: true},
     artists: {type: Object, required: true}
 })

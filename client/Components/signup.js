@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import LoginBox from "./login";
 
@@ -11,6 +11,8 @@ const SignUp = () => {
   const [newBio, setnewBio] = useState([]);
   const [newName, setnewName] = useState([]);
   const [newArtists, setnewArtists] = useState([]);
+  const [newImages, setnewImages] = useState([]);
+
 
     async function handleClick(e) {
       e.preventDefault();
@@ -27,6 +29,7 @@ const SignUp = () => {
             age: newAge, 
             bio: newBio,
             artist: newArtists,
+            images: newImages
           }),
         })
 
@@ -72,6 +75,14 @@ const SignUp = () => {
     console.log("pw", newPassword);
   }
 
+
+  function handleChangeImages(e) {
+
+  const fileURL = URL.createObjectURL(e.target.files[0]);
+
+    setnewImages(fileURL);
+    
+  }
   return (
     <div className="container">
       <div className="input-container">
@@ -145,6 +156,20 @@ const SignUp = () => {
           onChange={handleChangeBio}
         />
       </div>
+
+      <form className="input-container" method ="post" enctype="multipart/form-data">
+        <label htmlFor="createImages" className="label">
+          Upload Photos of Yourself
+        </label>
+        <input
+          id="createImage"
+          type="file"
+          multiple
+          name="file[]"
+          onChange={handleChangeImages}
+        />
+      </form>
+
 
       <button id="createAccount" type="submit" onClick={handleClick}>
         CREATE ACCOUNT

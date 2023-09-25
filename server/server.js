@@ -11,6 +11,10 @@ app.use(express.json());
 //require controller
 const controller = require('./Controllers/controller');
 
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -24,7 +28,13 @@ app.get('/signup', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 
-app.get('/main', (req, res) => {
+app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
+  res.status(200).json(res.locals.profileInfo);
+});
+
+
+
+app.get('/main', controller.findProfileAndMatches, (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 

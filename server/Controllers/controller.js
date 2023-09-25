@@ -2,6 +2,7 @@ const Profile = require('../Models/models.js');
 
 const controller = {};
 
+
 controller.verifyUser = async function(req, res, next){
     try{
         //find profile with same username 
@@ -21,7 +22,7 @@ controller.verifyUser = async function(req, res, next){
         }
         //if everything is correct, send back the profile object
         else{
-            res.locals.profile = req.body;
+            res.locals.profile = profile;
             return next();
         }
     } catch{
@@ -95,5 +96,52 @@ controller.createLoginCookie = function (req, res, next) {
 
     return next();
 }
+
+controller.findProfileAndMatches = async function(req, res, next){
+
+    try{
+
+        //get profile by _id which is in the cookie
+        const profileId = req.cookies.login;
+        const profile = await Profile.findOne({_id: profileId});
+
+        //store only the info that the frontend needs in a variable
+        const {username, name, age, bio, artists} = profile;
+        const profileInfo = {username, name, age, bio, artists};
+       
+        const arrayOfMatches = [];
+
+        const artistsArray = req.body.artists;
+
+        //loop through artistsArray and find profiles that include these artists
+        for (let i = 0; i < artistsArray.length; i++){
+
+            const newMatch = await Profile.find({'artists.Nickelback': { $exists: true }}, (err, profiles) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log(profiles);
+                }
+            });
+
+            arrayOfMatches.push(newMatch)
+
+        }
+
+        
+
+        
+
+
+    } catch(err){
+
+        return next({
+            log: 'Error in findProfile middleware function',
+            message: { err: 'Error in findProfile middleware function' }
+        })
+    }
+
+}
+
 
 module.exports = controller;

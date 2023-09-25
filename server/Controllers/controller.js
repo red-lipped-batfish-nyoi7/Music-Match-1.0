@@ -96,4 +96,48 @@ controller.createLoginCookie = function (req, res, next) {
     return next();
 }
 
+controller.findProfileAndMatches = async function(req, res, next){
+
+    try{
+
+        //get profile by _id which is in the cookie
+        const profileId = req.cookies.login;
+        const profile = await Profile.findOne({_id: profileId});
+
+        //store only the info that the frontend needs in a variable
+        const {username, name, age, bio, artists} = profile;
+        const userProfile = {username, name, age, bio, artists};
+       
+        const matchesProfiles = [];
+
+        const artistsArray = req.body.artists;
+
+        //loop through artistsArray and find profiles that include these artists
+        for (let i = 0; i < artistsArray.length; i++){
+            const newName = `artists[${artistsArray[i]}]`
+            const newMatch = await Profile.find({newName: { $exists: true }}, (err, profiles) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log(profiles);
+                }
+            });
+
+            matchesProfiles = matchesProfiles.concat(newMatch);
+
+        };
+
+        res.locals.pageinfo = {userProfile, matchesProfiles}
+
+        return next();
+
+    }catch(err){
+        return next({
+            log: 'Error in findProfile middleware function',
+            message: { err: 'Error in findProfile middleware function' }
+        })
+    }
+
+}
+
 module.exports = controller;

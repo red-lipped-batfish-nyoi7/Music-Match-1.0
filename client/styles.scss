@@ -144,3 +144,41 @@ input {
   transition: transform 0.2s ease-in-out; /* Add a smooth transition */
   margin-top: 10px;
 }
+
+.card-container {
+	background-color: #231E39;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	color: #B3B8CD;
+	padding-top: 30px;
+	width: 750px;
+	// max-width: 100%;
+  position: absolute;
+  left: 20%;
+	text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+
+  .card-container .profile {
+    background-color: #231E39;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 7px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+}
+
+.card-container .round {
+    border: 5px solid #03BFCB;
+    border-radius: 50%;
+    // padding: 7px;
+    width: 250px;
+    height: 250px;
+    max-width: 50%;
+    max-height: 50%;
+    overflow: hidden;
+  }

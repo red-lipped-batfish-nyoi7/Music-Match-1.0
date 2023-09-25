@@ -7,7 +7,7 @@ import React, {useState, useEffect} from 'react';
     //your artists
 
 
-const MainPage = () => {
+const MainPage = async () => {
     try{
         const response = await fetch('/userprofile');
         const userAndMatches = await response.json();

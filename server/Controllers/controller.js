@@ -47,11 +47,13 @@ controller.createUser = async function(req, res, next){
         if (existingProfile === null){
             console.log('we are in existingprofile')
             //format artists from request body
-            artist = artist.replace('\n', ' ');
-            artist = artist.replace(', ', ' ');
+            artist += ' ';
+            artist = artist.replaceAll('\n', ' ');
+            artist = artist.replaceAll(', ', ' ');
             artist = artist.split(' ');
             const artistObj = {}
             for(const artists of artist){
+                if(artists === ' ' || artists === '') continue;
                 artistObj[artists.toLowerCase()] = true;
             }
     

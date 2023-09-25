@@ -7,6 +7,7 @@ import React, {useState, useEffect} from 'react';
     //your artists
 
 
+
 const MainPage = () => {
     // try{
     //     const response = await fetch('/userprofile');
@@ -16,6 +17,7 @@ const MainPage = () => {
     //     console.error("An error occurred:", err);
     //     setMessage("An error occurred while fetching profile info.");
     // }
+
 
 
     return (

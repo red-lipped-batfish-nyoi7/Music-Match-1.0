@@ -188,37 +188,37 @@ input {
 //     max-height: 50%;
 //     overflow: hidden;
 //   }
-.card-container {
-  background-color: #231E39;
-  border-radius: 5px;
-  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
-  color: #B3B8CD;
-  width: 32%; /* Set the width to one-third of the page */
-  height: 98vh; /* Set the height to 100% of the viewport height */
-  position: absolute;
-  left: 2;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; /* Center content horizontally and vertically */
-}
+// .card-container {
+//   background-color: #231E39;
+//   border-radius: 5px;
+//   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+//   color: #B3B8CD;
+//   width: 32%; /* Set the width to one-third of the page */
+//   height: 98vh; /* Set the height to 100% of the viewport height */
+//   position: absolute;
+//   left: 2;
+//   text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center; /* Center content horizontally and vertically */
+// }
 
-.card-container .profile {
-  display: flex;
-  flex-direction: column;
-  background-color: #231E39;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 3px 7px;
-  position: absolute;
-  top: 30px;
-  // left: 30px;
-  align-items: center;
-  text-align: center;
+// .card-container .profile {
+//   display: flex;
+//   flex-direction: column;
+//   background-color: #231E39;
+//   border-radius: 3px;
+//   font-size: 14px;
+//   font-weight: bold;
+//   padding: 3px 7px;
+//   position: absolute;
+//   top: 30px;
+//   // left: 30px;
+//   align-items: center;
+//   text-align: center;
 
-}
+// }
 
 .card-container .round {
   border: 5px solid #03BFCB;
@@ -229,7 +229,73 @@ input {
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
+  
 }
+
+#profile{
+  margin-top: 40%;
+  color: white;
+  font-weight: bolder;
+  font-size: 200%;
+}
+
+
+
+.card-container {
+  // border-radius: 5px;
+  // box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  // color: #B3B8CD;
+  display: flex;
+  justify-content: space-between; /* Space out the columns */
+  padding: 20px; /* Add spacing inside the container */
+}
+
+
+.card {
+  // flex: 1; /* Each card takes equal width */
+  width: 32%;
+  height: 95vh;
+  background-color: #231E39;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+  text-align: center;
+}
+
+.left-card {
+  margin-right: 10px; /* Add spacing between the cards */
+}
+
+.right-card {
+  margin-left: 10px; /* Add spacing between the cards */
+}
+
+
+#gif{
+  margin-top: 30%;
+  bottom: 5%;
+  width: 25%;
+  height: 12.5%;
+  border-radius: 50%;
+}
+
+// .card-container {
+//   display: flex;
+//   justify-content: space-between; /* Space out the columns */
+// }
+
+// .left-column,
+// .right-column {
+//   flex: 1; /* Each column takes equal width */
+//   padding: 20px; /* Add spacing inside the columns */
+//   box-sizing: border-box; /* Include padding in width calculation */
+// }
+
+// /* Style for the profile and match divs can be added here */
+// .profile,
+// .matches {
+//   /* Add your styling for profile and match here */
+// }
 
 :root {
   --color-primary: #f6aca2;

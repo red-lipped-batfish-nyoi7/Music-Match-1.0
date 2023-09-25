@@ -15,7 +15,38 @@ const App = () => {
     // if(isTrue) {
     //     navigate('/main')
     //     return null;
+
     // }
+
+
+    // const [user, setUser] = useState([]);
+
+
+    //     fetch('http://localhost:3000/userprofile')
+    //     .then((data) => data.json())
+    //     .then((data) => {
+    //       setUser(data)
+          
+    //       console.log('hello', user)
+
+    //     })
+        
+    //     let array = [];
+    //     array.push(user);
+
+    //     let answer = [];
+    //     for(let i = 0; i < array.length; i++){
+    //       answer.push(
+    //         <div>{array[i].userProfile}</div>
+    //       )
+    //     }
+
+        
+    
+        // console.log('response' , data.userProfile)
+        // console.log('response2' , data.matchesProfiles[0])
+    
+
 
     return (
 

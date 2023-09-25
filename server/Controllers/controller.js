@@ -21,7 +21,7 @@ controller.verifyUser = async function(req, res, next){
         }
         //if everything is correct, send back the profile object
         else{
-            res.locals.profile = req.body;
+            res.locals.profile = profile;
             return next();
         }
     } catch{
@@ -82,12 +82,11 @@ controller.createUser = async function(req, res, next){
         })
 
     }
-
 }
 
 controller.createLoginCookie = function (req, res, next) {
-    console.log('made it to create cookie');
-    console.log(res.locals);
+    // console.log('made it to create cookie');
+    // console.log(res.locals);
 
     const { _id } = res.locals.profile;
     
@@ -99,45 +98,61 @@ controller.createLoginCookie = function (req, res, next) {
 controller.findProfileAndMatches = async function(req, res, next){
 
     try{
+        console.log("in try block")
 
         //get profile by _id which is in the cookie
         const profileId = req.cookies.login;
+        console.log("profileId", profileId);
         const profile = await Profile.findOne({_id: profileId});
+        console.log("profile", profile);
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
         const userProfile = {username, name, age, bio, artists};
        
-        const matchesProfiles = [];
+        let matchesProfiles = [];
 
-        const artistsArray = req.body.artists;
+        const artistsArray = artists;
+
+        console.log("artistsArray", artistsArray);
 
         //loop through artistsArray and find profiles that include these artists
-        for (let i = 0; i < artistsArray.length; i++){
-            const newName = `artists[${artistsArray[i]}]`
-            const newMatch = await Profile.find({newName: { $exists: true }}, (err, profiles) => {
-                if (err) {
-                    console.error(err);
-                } else {
-                    console.log(profiles);
-                }
-            });
+        for (const artist in artistsArray){
 
+            const newName = `artists.${artist}`;
+            const query = {};
+            query[newName] = { $exists: true };
+            
+            console.log("query", query);
+            const newMatch = await Profile.find(query);
+            console.log("newMatch", newMatch);
+           
             matchesProfiles = matchesProfiles.concat(newMatch);
 
         };
 
-        res.locals.pageinfo = {userProfile, matchesProfiles}
+        //remove duplicates from matchesProfiles
+        const matchCache = {};
+        const filteredMatches = [];
+        for(const match of matchesProfiles){
+            if(!matchCache.hasOwnProperty(match.username) && match.username !== username){
+                matchCache[match.username] = true;
+                filteredMatches.push(match);
+            }
+        }
+
+        res.locals.pageinfo = {userProfile, matchesProfiles: filteredMatches}
+
+        console.log("pageinfo", res.locals.pageinfo);
 
         return next();
 
     }catch(err){
         return next({
-            log: 'Error in findProfile middleware function',
-            message: { err: 'Error in findProfile middleware function' }
+            log: 'Error in findProfileAndMatches middleware function' + err,
+            message: { err: 'Error in findProfileAndMatches middleware function' }
         })
     }
-
 }
 
 module.exports = controller;

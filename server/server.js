@@ -8,6 +8,9 @@ app.use(cors());
 const mongoose = require("mongoose");
 app.use(express.json());
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 //require controller
 const controller = require('./Controllers/controller');
 
@@ -28,14 +31,14 @@ app.get('/main', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 
-app.get('/userprofile', (req, res) => { //hardcoded version for frontend testing, blocks the subsequent router
-  res.status(200).json({
-      userProfile: {
-        username: 'iLikeTarik', name: 'Tarik', age: '99', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']
-      },
-      matchesProfiles: [{username: 'iLikeTarik2', name: 'Tarik2', age: '98', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']}]
-  });
-});
+// app.get('/userprofile', (req, res) => { //hardcoded version for frontend testing, blocks the subsequent router
+//   res.status(200).json({
+//       userProfile: {
+//         username: 'iLikeTarik', name: 'Tarik', age: '99', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']
+//       },
+//       matchesProfiles: [{username: 'iLikeTarik2', name: 'Tarik2', age: '98', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']}]
+//   });
+// });
 app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
   res.status(200).json(res.locals.pageinfo);
 });

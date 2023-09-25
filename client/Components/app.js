@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import SignUp from "./signup";
-// import LoginBox from "./login";
-// import { Router } from "express";
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SignUp from "./signup";
+import LoginBox from "./login";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from "./mainpage"
 import '../styles.scss';
 
@@ -20,17 +19,15 @@ const App = () => {
 
     return (
 
-        <div>
-            <MainPage />
-        </div>
         
-    //     <Router>
-    //     <Routes>
-    //       <Route path="/signup" element={<SignUp />} />
-    //       <Route path="/" element={<LoginBox />} />
-    //       <Route path ='/main' element = {<MainPage />} />
-    //     </Routes>
-    //   </Router>
+        
+        <Router>
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<LoginBox />} />
+          <Route path ='/main' element = {<MainPage />} />
+        </Routes>
+      </Router>
         
        
         

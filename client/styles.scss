@@ -145,40 +145,83 @@ input {
   margin-top: 10px;
 }
 
+// .card-container {
+// 	background-color: #231E39;
+// 	border-radius: 5px;
+// 	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+// 	color: #B3B8CD;
+// 	padding-top: 30px;
+// 	width: 750px;
+// 	// max-width: 100%;
+//   position: absolute;
+//   left: 20%;
+// 	text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;  
+
+//   .card-container .profile {
+//     background-color: #231E39;
+//     border-radius: 3px;
+//     font-size: 14px;
+//     font-weight: bold;
+//     padding: 3px 7px;
+//     position: absolute;
+//     top: 30px;
+//     left: 30px;
+//   }
+// }
+
+// .card-container .round {
+//     border: 5px solid #03BFCB;
+//     border-radius: 50%;
+//     // padding: 7px;
+//     width: 250px;
+//     height: 250px;
+//     max-width: 50%;
+//     max-height: 50%;
+//     overflow: hidden;
+//   }
 .card-container {
-	background-color: #231E39;
-	border-radius: 5px;
-	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
-	color: #B3B8CD;
-	padding-top: 30px;
-	width: 750px;
-	// max-width: 100%;
+  background-color: #231E39;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  color: #B3B8CD;
+  width: 32%; /* Set the width to one-third of the page */
+  height: 98vh; /* Set the height to 100% of the viewport height */
   position: absolute;
-  left: 20%;
-	text-align: center;
+  left: 2;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;  
+  justify-content: center;
+  align-items: center; /* Center content horizontally and vertically */
+}
 
-  .card-container .profile {
-    background-color: #231E39;
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 3px 7px;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-  }
+.card-container .profile {
+  display: flex;
+  flex-direction: column;
+  background-color: #231E39;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 3px 7px;
+  position: absolute;
+  top: 30px;
+  // left: 30px;
+  align-items: center;
+  text-align: center;
+
 }
 
 .card-container .round {
-    border: 5px solid #03BFCB;
-    border-radius: 50%;
-    // padding: 7px;
-    width: 250px;
-    height: 250px;
-    max-width: 50%;
-    max-height: 50%;
-    overflow: hidden;
-  }
+  border: 5px solid #03BFCB;
+  border-radius: 50%;
+  align-items: center;
+  width: 70%; /* Adjust the width as needed */
+  height: 70%; /* Adjust the height as needed */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+

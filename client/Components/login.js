@@ -1,7 +1,7 @@
 //this is the user login page
 //parent component: App (renders everything to the bundle)
 //App passes state to these components - what do we need state for?
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate, Link } from 'react-router-dom';
 
 import React, { useState, useEffect } from "react";
 // import ReactDOM from 'react-dom/client';
@@ -25,6 +25,8 @@ const LoginBox = () => {
 
 //container component
 function LoginModal() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -32,26 +34,37 @@ function LoginModal() {
   // const history = useHistory();
 
   const handleLogin = async (e) => {
+    // const navigate = useNavigate();
+
     e.preventDefault();
 
     try {
-      const response = await fetch("/login/verify", {
+      const response = await fetch("http://localhost:3000/login/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
-      });
+      })
 
-      if (response.ok) {
+
+      if (response.status === 200) {
         setMessage("Login successful!");
         // history.push('/main');
+          console.log('hello')
+        navigate ('/main');
+       
+        
         console.log("Login successful", response.body);
-      } else {
-        const errorData = await response.json();
-        setMessage(`Login failed: ${errorData.message}`);
       }
+      else {
+            const errorData = await response.json();
+            setMessage(`Login failed: ${errorData.message}`);
+          }
+
+
     } catch (error) {
+      console.log('error login in')
       console.error("An error occurred:", error);
       setMessage("An error occurred while logging in.");
     }

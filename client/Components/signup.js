@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import LoginBox from "./login";
 
 const SignUp = () => {
+  // const navigate = useNavigate();
   const [newUserName, setnewUserName] = useState([]);
   const [newPassword, setnewPassword] = useState([]);
 
@@ -13,7 +15,7 @@ const SignUp = () => {
     async function handleClick(e) {
       e.preventDefault();
       try {
-        const response = await fetch("http://localhost:3000/signup/verify", {
+        const response = await fetch("http://localhost:3000/signup", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -26,7 +28,15 @@ const SignUp = () => {
             bio: newBio,
             artist: newArtists,
           }),
-        });
+        })
+
+        if(response.status === 200){
+          console.log('hi')
+          
+        // navigate ('/main');
+       
+        }
+      
     
       
     }catch(err){

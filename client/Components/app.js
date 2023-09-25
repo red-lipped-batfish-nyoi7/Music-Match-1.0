@@ -8,6 +8,16 @@ import '../styles.scss';
 
 const App = () => {
 
+
+    const isTrue = document.cookie;
+    // const navigate  = useNavigate();
+  
+   
+    // if(isTrue) {
+    //     navigate('/main')
+    //     return null;
+    // }
+
     return (
 
         // <div>
@@ -19,6 +29,7 @@ const App = () => {
             <Switch>
             {/* <Route path="/main" component={MainPage} /> */}
             <Route path ='/signup'> <SignUp/> </Route>
+         
 
             <Route path ='/'> <LoginBox/> </Route>
             </Switch>

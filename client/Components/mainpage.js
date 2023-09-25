@@ -54,7 +54,7 @@ const MainPage = () => {
     </div>
 
     <img id = 'gif' src = 'https://media.tenor.com/Ez2x8MFvP0QAAAAC/heart-heartbeat.gif'/>
-
+        <h1 id='matcher'> TWO PEAS IN A POD</h1>
     <div className="card right-card">
       <span className="matches">
         <MatchProfile inf={match} />
@@ -112,7 +112,7 @@ const Profile =  (props) => {
         
 
         {/* <h1>{name}</h1> */}
-        <img class='round' src='https://ih1.redbubble.net/image.1530009255.8904/st,small,507x507-pad,600x600,f8f8f8.jpg'></img>
+        <img class='round' src='https://play-lh.googleusercontent.com/TUtOJfxHm78ggM9Ssl2iAO2sDXeJ5rYauo_TTc9SiUsscHppl_TydsCwDoyZhfDv5qM'></img>
         <div id='profile'>
         <p>Name: {name}</p>
         <p>Age: {age}</p>
@@ -144,7 +144,7 @@ const MatchProfile =  (props) => {
         
 
         {/* <h1>{name}</h1> */}
-        <img class='round' src='https://ih1.redbubble.net/image.1530009255.8904/st,small,507x507-pad,600x600,f8f8f8.jpg'></img>
+        <img class='round' src='https://png.pngtree.com/png-clipart/20220101/ourmid/pngtree-3d-apple-fruit-red-illustration-png-image_4147443.png'></img>
         <div id='profile'>
         <p>Name: {name}</p>
         <p>Age: {age}</p>

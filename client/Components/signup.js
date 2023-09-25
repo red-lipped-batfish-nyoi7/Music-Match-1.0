@@ -85,6 +85,7 @@ const SignUp = () => {
   }
   return (
     <div className="container">
+    <h1 id="text-shadows-2">Music Match</h1>
       <div className="input-container">
         <label htmlFor="createUser" className="label">
           New Username:

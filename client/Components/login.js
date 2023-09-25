@@ -73,6 +73,7 @@ function LoginModal() {
   return (
     <form className="login-wrapper">
       <div>
+        <h1 id="text-shadows">Music Match</h1>
         <label>
           Username:
           <input

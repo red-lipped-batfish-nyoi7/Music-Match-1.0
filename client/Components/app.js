@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SignUp from "./signup";
 import LoginBox from "./login";
 // import { Router } from "express";
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from "./mainpage"
 import '../styles.scss';
 
@@ -26,15 +26,12 @@ const App = () => {
         // </div>
         
         <Router>
-            <Switch>
-            {/* <Route path="/main" component={MainPage} /> */}
-            <Route path ='/signup'> <SignUp/> </Route>
-         
-
-            <Route path ='/'> <LoginBox/> </Route>
-            </Switch>
-            
-    </Router>
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<LoginBox />} />
+          <Route path ='/main' element = {<MainPage />} />
+        </Routes>
+      </Router>
         
        
         

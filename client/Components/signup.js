@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import LoginBox from "./login";
 
 const SignUp = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [newUserName, setnewUserName] = useState([]);
   const [newPassword, setnewPassword] = useState([]);
 
@@ -33,7 +33,7 @@ const SignUp = () => {
         if(response.status === 200){
           console.log('hi')
           
-        // navigate ('/main');
+        navigate ('/main');
        
         }
       

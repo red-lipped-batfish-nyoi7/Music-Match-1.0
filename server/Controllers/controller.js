@@ -77,7 +77,7 @@ controller.createUser = async function(req, res, next){
         //global error
         
         return next({
-            log: 'Error in createUser middleware function' + err,
+            log: 'Error in createUser middleware function',
             message: { err: 'Error in createUser middleware function' }
         })
 

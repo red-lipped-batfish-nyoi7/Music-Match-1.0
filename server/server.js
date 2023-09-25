@@ -25,7 +25,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/main', (req, res) => {
-  res.status(200).send('hello')
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 
 // app.get('/signup', (req, res) => {

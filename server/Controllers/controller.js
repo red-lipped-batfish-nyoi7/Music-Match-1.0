@@ -33,51 +33,51 @@ controller.verifyUser = async function(req, res, next){
 }
 
 controller.createUser = async function(req, res, next){
-
     try{
         console.log("in the createUser try block")
         //make sure user doesn't exist in database
 
-        //console.log(req.body);
-        let { username, artists } = req.body;
+        let { username, artist } = req.body;
 
-
+        console.log('input', req.body)
         const existingProfile = await Profile.findOne({username: username})
 
         
         //if it doesn't add user
         if (existingProfile === null){
-
+            console.log('we are in existingprofile')
             //format artists from request body
-            artists.replace('\n', ' ');
-            artists.replace(', ', ' ');
-            artists = artists.split(' ');
+            artist = artist.replace('\n', ' ');
+            artist = artist.replace(', ', ' ');
+            artist = artist.split(' ');
             const artistObj = {}
-            for(const artist of artists){
-                artistObj[artist.toLowerCase()] = true;
+            for(const artists of artist){
+                artistObj[artists.toLowerCase()] = true;
             }
     
             const newUser = { ...req.body, artists: artistObj}
             // console.log("creating user", newUser)
             // console.log(req.body);
             const newProfile = await Profile.create(newUser);
+            console.log('await new profile', newProfile)
             res.locals.profile = newProfile;
             return next();
         }
         
         //username already exists
         else return next({
-            log: 'Username already exists',
-            status: 400,
+            log: 'Username already exists' + err,
+            status: 400, 
             message: { err: 'Username already exists' }
+        
 
         })
 
-    } catch{
+    } catch(err){
         //global error
         
         return next({
-            log: 'Error in createUser middleware function',
+            log: 'Error in createUser middleware function' + err,
             message: { err: 'Error in createUser middleware function' }
         })
 

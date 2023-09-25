@@ -1,0 +1,450 @@
+
+body {
+  background: linear-gradient(135deg, #87CEEB, #FFC0CB, #B0E0E6);
+  background-size: 400% 400%;
+  animation: gradient 10s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+// .container {
+//     display: flex;
+//     flex-direction: column; /* Stack items vertically */
+//     align-items: center; /* Horizontally center items */
+//     justify-content: center; /* Vertically center items */
+//     height: 100vh; /* 100% of viewport height */
+//   }
+  
+//   .input-container {
+//     font-weight: bolder;
+//     display: flex;
+//     justify-content: end;
+//     align-items: left; /* Center items vertically */
+//     margin-bottom: 10px; /* Adjust the margin as needed */
+//   }
+  
+//   .label {
+//     // display: inline-block;
+//     // width: 150px; /* Adjust the width as needed */
+//     // text-align: left; /* Align text to the right */
+//     margin-right: 10px; /* Add spacing between label and input */
+//   }
+  
+
+
+//   .custom-input {
+//     border: 3px solid black;
+//     height: 35%; /* Adjust the height as needed for each input box */
+//     width: 100%; /* Occupy remaining width */
+//   }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align labels to the left */
+  justify-content: center; /* Center vertically */
+  height: 100vh;
+}
+
+.input-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.label {
+  width: 300px; /* Adjust the width as needed */
+  text-align: left; /* Align labels to the left */
+  margin-right: 10px; /* Add spacing between label and input */
+  font-weight: bolder;
+  color: #231E39;
+}
+
+input {
+  border: 2px solid black;
+  height: 20px; /* Adjust the height as needed */
+  width: 100%; /* Occupy remaining width */
+  background-color: beige;
+}
+
+  
+//   #createPW{
+//     border: 2px solid black;
+//   }
+
+//   #createUser{
+//     border: 2px solid black;
+//   }
+
+//   #createAge{
+//     border: 2px solid black;
+//   }
+
+//   #createName{
+//     border: 2px solid black;
+//   }
+
+  #createArtists{
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+    background-color: beige;
+    color: #231E39;
+
+  }
+
+  #createBio{
+    display: flex;
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: start;
+    background-color: beige;
+    color: #231E39;
+   
+  }
+
+  #createAccount {
+    font-weight: bolder;
+    background-color: #2ecc71;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Add a smooth transition */
+    margin-top: 10px;
+    
+  }
+
+  .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100vh; /* Make the form take the full height of the viewport */
+    margin: 0 auto; /* Center the form horizontally */
+    max-width: 400px; /* Set a maximum width for the form */
+    padding: 20px; /* Add some padding for spacing */
+    color: #231E39;
+    font-weight: bold;
+  }
+  
+  /* Additional styling for form elements (e.g., labels, inputs, buttons) can go here */
+  
+
+.loginButton {
+  font-weight: bolder;
+  background-color: #2ecc71;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out; /* Add a smooth transition */
+  margin-top: 10px;
+}
+
+// .card-container {
+// 	background-color: #231E39;
+// 	border-radius: 5px;
+// 	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+// 	color: #B3B8CD;
+// 	padding-top: 30px;
+// 	width: 750px;
+// 	// max-width: 100%;
+//   position: absolute;
+//   left: 20%;
+// 	text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;  
+
+//   .card-container .profile {
+//     background-color: #231E39;
+//     border-radius: 3px;
+//     font-size: 14px;
+//     font-weight: bold;
+//     padding: 3px 7px;
+//     position: absolute;
+//     top: 30px;
+//     left: 30px;
+//   }
+// }
+
+// .card-container .round {
+//     border: 5px solid #03BFCB;
+//     border-radius: 50%;
+//     // padding: 7px;
+//     width: 250px;
+//     height: 250px;
+//     max-width: 50%;
+//     max-height: 50%;
+//     overflow: hidden;
+//   }
+// .card-container {
+//   background-color: #231E39;
+//   border-radius: 5px;
+//   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+//   color: #B3B8CD;
+//   width: 32%; /* Set the width to one-third of the page */
+//   height: 98vh; /* Set the height to 100% of the viewport height */
+//   position: absolute;
+//   left: 2;
+//   text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center; /* Center content horizontally and vertically */
+// }
+
+// .card-container .profile {
+//   display: flex;
+//   flex-direction: column;
+//   background-color: #231E39;
+//   border-radius: 3px;
+//   font-size: 14px;
+//   font-weight: bold;
+//   padding: 3px 7px;
+//   position: absolute;
+//   top: 30px;
+//   // left: 30px;
+//   align-items: center;
+//   text-align: center;
+
+// }
+
+.card-container .round {
+  border: 5px solid #03BFCB;
+  border-radius: 50%;
+  align-items: center;
+  width: 70%; /* Adjust the width as needed */
+  height: 70%; /* Adjust the height as needed */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  
+}
+
+#profile{
+  margin-top: 30%;
+  color: var(--color-primary);
+  font-weight: bolder;
+  font-size: 200%;
+}
+
+
+
+.card-container {
+  // border-radius: 5px;
+  // box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  // color: #B3B8CD;
+  display: flex;
+  justify-content: space-between; /* Space out the columns */
+  padding: 20px; /* Add spacing inside the container */
+}
+
+
+.card {
+  // flex: 1; /* Each card takes equal width */
+  width: 32%;
+  height: 95vh;
+  background-color: #231E39;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+  text-align: center;
+}
+
+.left-card {
+  margin-right: 10px; /* Add spacing between the cards */
+}
+
+.right-card {
+  margin-left: 10px; /* Add spacing between the cards */
+}
+
+
+#gif{
+  margin-top: 40%;
+  bottom: 5%;
+  width: 25%;
+  height: 12.5%;
+  border-radius: 50%;
+}
+
+// .card-container {
+//   display: flex;
+//   justify-content: space-between; /* Space out the columns */
+// }
+
+// .left-column,
+// .right-column {
+//   flex: 1; /* Each column takes equal width */
+//   padding: 20px; /* Add spacing inside the columns */
+//   box-sizing: border-box; /* Include padding in width calculation */
+// }
+
+// /* Style for the profile and match divs can be added here */
+// .profile,
+// .matches {
+//   /* Add your styling for profile and match here */
+// }
+
+:root {
+  --color-primary: #f6aca2;
+  --color-secondary: #f49b90;
+  --color-tertiary: #f28b7d;
+  --color-quaternary: #f07a6a;
+  --color-quinary: #ee6352;
+  /*
+  --color-primary: #5192ED;
+  --color-secondary: #69A1F0;
+  --color-tertiary: #7EAEF2;
+  --color-quaternary: #90BAF5;
+  --color-quinary: #A2C4F5;
+  */
+}
+
+#text-shadows{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0; /* Optional, if you want it to be on the left side */
+  right: 0; /* Optional, if you want it to be on the right side */
+  position: fixed;
+  top: 20%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
+    9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: calc(2rem + 5vw);
+  text-align: center;
+  margin: 0;
+  color: var(--color-primary);
+  //color: transparent;
+  //background-color: white;
+  //background-clip: text;
+  animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
+  letter-spacing: 0.4rem;
+}
+
+@keyframes shadows {
+  0% {
+    text-shadow: none;
+  }
+  10% {
+    text-shadow: 3px 3px 0 var(--color-secondary);
+  }
+  20% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary);
+  }
+  30% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+  }
+  40% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary),
+      12px 12px 0 var(--color-quinary);
+  }
+  50% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary),
+      12px 12px 0 var(--color-quinary);
+  }
+  60% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary),
+      12px 12px 0 var(--color-quinary);
+  }
+  70% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+  }
+  80% {
+    text-shadow: 3px 3px 0 var(--color-secondary),
+      6px 6px 0 var(--color-tertiary);
+  }
+  90% {
+    text-shadow: 3px 3px 0 var(--color-secondary);
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  40% {
+    transform: translate(-12px, -12px);
+  }
+  50% {
+    transform: translate(-12px, -12px);
+  }
+  60% {
+    transform: translate(-12px, -12px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+#text-shadows-2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0; /* Optional, if you want it to be on the left side */
+  right: 0; /* Optional, if you want it to be on the right side */
+  position: absolute;
+  top: 5%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
+    9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: calc(2rem + 5vw);
+  text-align: center;
+  margin: 0;
+  color: var(--color-primary);
+  //color: transparent;
+  //background-color: white;
+  //background-clip: text;
+  animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
+  letter-spacing: 0.4rem;
+}
+
+#matcher{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 27%;
+  left: 37%; /* Optional, if you want it to be on the left side */
+  right: 0; /* Optional, if you want it to be on the right side */
+  position: absolute;
+  top: 5%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
+    9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: calc(2rem + 5vw);
+  text-align: center;
+  margin: 0;
+  color: var(--color-primary);
+  //color: transparent;
+  //background-color: white;
+  //background-clip: text;
+  animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
+  letter-spacing: 0.4rem;
+}

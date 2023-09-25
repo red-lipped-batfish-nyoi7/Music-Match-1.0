@@ -8,13 +8,59 @@ app.use(cors());
 const mongoose = require("mongoose");
 app.use(express.json());
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+//require controller
+const controller = require('./Controllers/controller');
+
+
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
+
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+});
 //this is basic homepage with login and signup 
-app.use('/', (req, res) => {
+app.get('/signup', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
+
+app.get('/main', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+});
+
+// app.get('/userprofile', (req, res) => { //hardcoded version for frontend testing, blocks the subsequent router
+//   res.status(200).json({
+//       userProfile: {
+//         username: 'iLikeTarik', name: 'Tarik', age: '99', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']
+//       },
+//       matchesProfiles: [{username: 'iLikeTarik2', name: 'Tarik2', age: '98', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']}]
+//   });
+// });
+app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
+  res.status(200).json(res.locals.pageinfo);
+});
+
+// app.get('/signup', (req, res) => {
+//   res.status(200).send('hello this is signup')
+// });
+//verify user middleware chain
+app.post('/login/verify', 
+  controller.verifyUser, 
+  controller.createLoginCookie,
+  (req, res) => {
+  res.status(200).json(res.locals.profile)
+})
+
+app.post('/signup', 
+  controller.createUser, 
+  controller.createLoginCookie, 
+  (req, res) => {
+  res.status(200).json(res.locals.profile)
+})
+
 
 
 

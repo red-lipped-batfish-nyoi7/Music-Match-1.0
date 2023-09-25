@@ -107,16 +107,16 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
-        const profileInfo = {username, name, age, bio, artists};
+        const userProfile = {username, name, age, bio, artists};
        
-        const arrayOfMatches = [];
+        const matchesProfiles = [];
 
         const artistsArray = req.body.artists;
 
         //loop through artistsArray and find profiles that include these artists
         for (let i = 0; i < artistsArray.length; i++){
-
-            const newMatch = await Profile.find({'artists.Nickelback': { $exists: true }}, (err, profiles) => {
+            const newName = `artists[${artistsArray[i]}]`
+            const newMatch = await Profile.find({newName: { $exists: true }}, (err, profiles) => {
                 if (err) {
                     console.error(err);
                 } else {
@@ -124,17 +124,15 @@ controller.findProfileAndMatches = async function(req, res, next){
                 }
             });
 
-            arrayOfMatches.push(newMatch)
+            matchesProfiles = matchesProfiles.concat(newMatch);
 
-        }
+        };
 
-        
+        res.locals.pageinfo = {userProfile, matchesProfiles}
 
-        
+        return next();
 
-
-    } catch(err){
-
+    }catch(err){
         return next({
             log: 'Error in findProfile middleware function',
             message: { err: 'Error in findProfile middleware function' }

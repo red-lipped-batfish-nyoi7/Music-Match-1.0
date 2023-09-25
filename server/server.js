@@ -29,7 +29,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
-  res.status(200).json(res.locals.profileInfo);
+  res.status(200).json(res.locals.pageinfo);
 });
 
 

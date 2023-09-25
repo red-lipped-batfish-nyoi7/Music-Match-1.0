@@ -38,6 +38,10 @@ app.get('/main', controller.findProfileAndMatches, (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
 });
 
+app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
+  res.status(200).json(res.locals.pageinfo);
+});
+
 // app.get('/signup', (req, res) => {
 //   res.status(200).send('hello this is signup')
 // });

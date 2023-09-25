@@ -160,7 +160,7 @@ input {
   flex-direction: column;
   justify-content: center;  
 
-  .card-container .pro {
+  .card-container .profile {
     background-color: #231E39;
     border-radius: 3px;
     font-size: 14px;
@@ -169,14 +169,16 @@ input {
     position: absolute;
     top: 30px;
     left: 30px;
-    
-    .card-container .round {
-      // border: 1px solid #03BFCB;
-      // border-radius: 50%;
-      // padding: 7px;
-      width: 25px;
-      height: auto;
-    }
   }
 }
 
+.card-container .round {
+    border: 5px solid #03BFCB;
+    border-radius: 50%;
+    // padding: 7px;
+    width: 250px;
+    height: 250px;
+    max-width: 50%;
+    max-height: 50%;
+    overflow: hidden;
+  }

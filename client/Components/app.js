@@ -7,8 +7,20 @@ import '../styles.scss';
 
 const App = () => {
 
+    return (
+        <Router>
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<LoginBox />} />
+          <Route path ='/main' element = {<MainPage />} />
+        </Routes>
+      </Router>
+    )
+}
 
-    // const isTrue = document.cookie;
+export default App;
+
+ // const isTrue = document.cookie;
     // const navigate  = useNavigate();
   
    
@@ -46,23 +58,3 @@ const App = () => {
         // console.log('response' , data.userProfile)
         // console.log('response2' , data.matchesProfiles[0])
     
-
-
-    return (
-
-        
-        
-        <Router>
-        <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={<LoginBox />} />
-          <Route path ='/main' element = {<MainPage />} />
-        </Routes>
-      </Router>
-        
-       
-        
-    )
-}
-
-export default App;

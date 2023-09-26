@@ -56,7 +56,9 @@ controller.createUser = async function(req, res, next){
             }
     
             const newUser = { ...req.body, artists: artistObj}
-            // console.log("creating user", newUser)
+
+            console.log("creating user", newUser)
+
             // console.log(req.body);
             const newProfile = await Profile.create(newUser);
             console.log('await new profile', newProfile)
@@ -96,6 +98,8 @@ controller.createLoginCookie = function (req, res, next) {
 }
 
 controller.findProfileAndMatches = async function(req, res, next){
+
+    console.log("FIND PROFILE AND MATCHES");
 
     try{
         console.log("in try block")

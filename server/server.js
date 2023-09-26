@@ -1,9 +1,9 @@
-const http = require("http");
-const path = require("path");
-const express = require("express");
-const cors = require("cors");
+const http = require('http');
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 //require controller
 const controller = require('./Controllers/controller');
@@ -65,19 +65,19 @@ app.post('/signup',
 
 
 
-app.use("*", (req, res, next) => {
+app.use('*', (req, res, next) => {
     return next({
-      log: "Endpoint does not exist",
+      log: 'Endpoint does not exist',
       status: 404,
-      message: { err: "Website does not exist! :(" },
+      message: { err: 'Website does not exist! :(' },
     });
   });
   
   app.use((err, req, res, next) => {
     const defaultErr = {
-      log: "Express error handler caught unknown middleware error",
+      log: 'Express error handler caught unknown middleware error',
       status: 500,
-      message: { err: "An error occurred" },
+      message: { err: 'An error occurred' },
     };
     const errorObj = Object.assign({}, defaultErr, err);
     console.log(errorObj.log);
@@ -85,5 +85,5 @@ app.use("*", (req, res, next) => {
   });
 
   app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+  console.log('Server running on port', PORT);
 });

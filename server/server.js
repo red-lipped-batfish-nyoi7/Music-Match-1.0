@@ -1,9 +1,9 @@
-const http = require("http");
-const path = require("path");
-const express = require("express");
-const cors = require("cors");
+const http = require('http');
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 //require controller
 const controller = require('./Controllers/controller');
@@ -17,12 +17,29 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-// serve static files
+
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+});
+//this is basic homepage with login and signup 
+app.get('/signup', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+});
 
+app.get('/main', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
+});
 
-
+// app.get('/userprofile', (req, res) => { //hardcoded version for frontend testing, blocks the subsequent router
+//   res.status(200).json({
+//       userProfile: {
+//         username: 'iLikeTarik', name: 'Tarik', age: '99', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']
+//       },
+//       matchesProfiles: [{username: 'iLikeTarik2', name: 'Tarik2', age: '98', bio: 'at codesmith rn', artists: ['Drakeo', 'Greedo']}]
+//   });
+// });
 app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
   res.status(200).json(res.locals.pageinfo);
 });
@@ -44,19 +61,19 @@ app.post('/signup',
 
 
 
-app.use("*", (req, res, next) => {
+app.use('*', (req, res, next) => {
     return next({
-      log: "Endpoint does not exist",
+      log: 'Endpoint does not exist',
       status: 404,
-      message: { err: "Website does not exist! :(" },
+      message: { err: 'Website does not exist! :(' },
     });
   });
   
   app.use((err, req, res, next) => {
     const defaultErr = {
-      log: "Express error handler caught unknown middleware error",
+      log: 'Express error handler caught unknown middleware error',
       status: 500,
-      message: { err: "An error occurred" },
+      message: { err: 'An error occurred' },
     };
     const errorObj = Object.assign({}, defaultErr, err);
     console.log(errorObj.log);
@@ -64,5 +81,5 @@ app.use("*", (req, res, next) => {
   });
 
   app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+  console.log('Server running on port', PORT);
 });

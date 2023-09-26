@@ -32,14 +32,13 @@ controller.verifyUser = async function(req, res, next){
 
 controller.createUser = async function(req, res, next){
     try{
-        console.log("in the createUser try block")
+        console.log('In The createUser Try Block')
         //make sure user doesn't exist in database
 
         let { username, artist } = req.body;
 
         console.log('input', req.body)
         const existingProfile = await Profile.findOne({username: username})
-
         
         //if it doesn't add user
         if (existingProfile === null){
@@ -56,9 +55,7 @@ controller.createUser = async function(req, res, next){
             }
     
             const newUser = { ...req.body, artists: artistObj}
-
-            console.log("creating user", newUser)
-
+            // console.log('creating user', newUser)
             // console.log(req.body);
             const newProfile = await Profile.create(newUser);
             console.log('await new profile', newProfile)
@@ -102,13 +99,13 @@ controller.findProfileAndMatches = async function(req, res, next){
     console.log("FIND PROFILE AND MATCHES");
 
     try{
-        console.log("in try block")
+        console.log('in try block')
 
         //get profile by _id which is in the cookie
         const profileId = req.cookies.login;
-        console.log("profileId", profileId);
+        console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
-        console.log("profile", profile);
+        console.log('profile', profile);
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
@@ -118,7 +115,7 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         const artistsArray = artists;
 
-        console.log("artistsArray", artistsArray);
+        console.log('artistsArray', artistsArray);
 
         //loop through artistsArray and find profiles that include these artists
         for (const artist in artistsArray){
@@ -127,9 +124,9 @@ controller.findProfileAndMatches = async function(req, res, next){
             const query = {};
             query[newName] = { $exists: true };
             
-            console.log("query", query);
+            console.log('query', query);
             const newMatch = await Profile.find(query);
-            console.log("newMatch", newMatch);
+            console.log('newMatch', newMatch);
            
             matchesProfiles = matchesProfiles.concat(newMatch);
 
@@ -147,7 +144,7 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         res.locals.pageinfo = {userProfile, matchesProfiles: filteredMatches}
 
-        console.log("pageinfo", res.locals.pageinfo);
+        console.log('pageinfo', res.locals.pageinfo);
 
         return next();
 

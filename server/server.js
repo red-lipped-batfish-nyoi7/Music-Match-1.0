@@ -1,23 +1,24 @@
 const http = require("http");
 const path = require("path");
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const PORT = 3000;
-app.use(cors());
-const mongoose = require("mongoose");
-app.use(express.json());
-
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+const mongoose = require("mongoose");
 
 //require controller
 const controller = require('./Controllers/controller');
 
+const PORT = 3000;
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
 
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
-
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'))
@@ -84,5 +85,5 @@ app.use("*", (req, res, next) => {
   });
 
   app.listen(PORT, () => {
-  console.log("Server running on port");
+  console.log("Server running on port", PORT);
 });

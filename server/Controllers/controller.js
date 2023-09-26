@@ -9,8 +9,6 @@ controller.verifyUser = async function(req, res, next){
 
         console.log('found profile?..', profile)
 
-        
-
         //if profile not found OR incorrect password, take to signup page
         if (profile === null || profile.password !== req.body.password){
             return next({

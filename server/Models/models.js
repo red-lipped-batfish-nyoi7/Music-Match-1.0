@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+require('dotenv').config();
 
-const MONGO_URI = "mongodb+srv://swAPP:CodesmithU10@cluster0.qzanrz5.mongodb.net/?retryWrites=true&w=majority"
+const MONGO_URI = process.env.MONGO_URI;
+console.log('DATABASE TEST', MONGO_URI)
+
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'red-lipped-batfish'
+    dbName: '65020df807624f7a95321280'
 })
     .then(() => console.log('connected to MongoDB...'))
-    .catch(err => console.log('MongoDB error: ', err))
+    .catch(err => console.error('MongoDB Error: ', err))
 
 
 const profileSchema = new Schema({

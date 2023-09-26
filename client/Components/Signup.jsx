@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -11,6 +11,7 @@ const SignUp = () => {
   const [newName, setnewName] = useState([]);
   const [newImages, setnewImages] = useState([]);
 
+  const [artist, setArtist] = useState('');
   const [newArtists, setnewArtists] = useState([]);
 
     async function handleClick(e) {
@@ -67,9 +68,21 @@ const SignUp = () => {
     console.log("pw", newPassword);
   }
 
-  function handleChangeNewArtists(e) {
-    setnewArtists(e.target.value);
-    console.log("pw", newPassword);
+    // here
+  function handleChangeNewArtist(e) {
+    // setnewArtists(prev => prev.push(e.target.value))
+    setArtist(e.target.value);
+  }
+
+  function handleAddArtist() {
+    if(!newArtists.includes(artist) && newArtists.length < 10) {
+        setnewArtists(prev => [...prev, artist]);
+    }
+    setArtist('');
+  }
+
+  function handleClearArtists() {
+    setnewArtists([])
   }
 
   function handleChangeImages(e) { // what even is this??
@@ -129,18 +142,6 @@ const SignUp = () => {
       </div>
 
       <div className="input-container">
-        <label htmlFor="createArtists" className="label">
-          Who Are Your Favorite Artists?{" "}
-        </label>
-        <textarea
-          id="createArtists"
-          type="text"
-          value={newArtists}
-          onChange={handleChangeNewArtists}
-        />
-      </div>
-
-      <div className="input-container">
         <label htmlFor="createBio" className="label">
           Let People Know About You!
         </label>
@@ -165,6 +166,27 @@ const SignUp = () => {
         />
       </form>
 
+      <div className="input-container">
+        <label htmlFor="createArtists" className="label">
+          Who Are Your Favorite Artists?{" "}
+        </label>
+        <textarea
+          id="createArtists"
+          type="text"
+          value={artist}
+          placeholder="Minimum 3, max 10 Artists (you can always add more later!)"
+          onChange={handleChangeNewArtist}
+        />
+        <button onClick={handleAddArtist}>Add Artist</button>
+        <button onClick={handleClearArtists}>Clear Artists</button>
+      </div>
+      
+      <div>
+        <span style={{ "fontWeight": "bold" }}>Favorite Artists: </span>
+        {newArtists.map((a, indx) => {
+            return (<span key={indx}>{a}{indx === newArtists.length-1 ? " " : ", "}</span>)
+        })}
+      </div>
 
       <button id="createAccount" type="submit" onClick={handleClick}>
         CREATE ACCOUNT

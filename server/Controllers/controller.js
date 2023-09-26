@@ -32,55 +32,37 @@ controller.verifyUser = async function(req, res, next){
 
 controller.createUser = async function(req, res, next){
     try{
-        console.log('In The createUser Try Block')
-        //make sure user doesn't exist in database
+        const { username } = req.body;
+        const { body } = req;
 
-        let { username, artist } = req.body;
+        console.log('THIS IS BODY', body)
 
-        console.log('input', req.body)
         const existingProfile = await Profile.findOne({username: username})
-        
-        //if it doesn't add user
-        if (existingProfile === null){
-            console.log('we are in existingprofile')
-            //format artists from request body
-            artist += ' ';
-            artist = artist.replaceAll('\n', ' ');
-            artist = artist.replaceAll(', ', ' ');
-            artist = artist.split(' ');
-            const artistObj = {}
-            for(const artists of artist){
-                if(artists === ' ' || artists === '') continue;
-                artistObj[artists.toLowerCase()] = true;
-            }
-    
-            const newUser = { ...req.body, artists: artistObj}
-            // console.log('creating user', newUser)
-            // console.log(req.body);
-            const newProfile = await Profile.create(newUser);
-            console.log('await new profile', newProfile)
-            res.locals.profile = newProfile;
-            return next();
+        console.log('THIS ALREADY EXIST', existingProfile);
+
+        if (existingProfile) {
+            console.log('I MADE IT IN')
+            return next({
+                  log: 'Username already exists',
+                  status: 400, 
+                  message: { err: 'Username already exists' }
+                })
         }
         
-        //username already exists
-        else return next({
-            log: 'Username already exists' + err,
-            status: 400, 
-            message: { err: 'Username already exists' }
-        
+        const newProfile = await Profile.create(body);
+        console.log('await new profile', newProfile)
+        res.locals.profile = newProfile;
+        return next();
 
-        })
 
-    } catch(err){
-        //global error
-        
+       } catch(err){
+        //global error 
+        console.log('ERROR FROM CATCH', err)
         return next({
             log: 'Error in createUser middleware function',
             message: { err: 'Error in createUser middleware function' }
         })
-
-    }
+       }
 }
 
 controller.createLoginCookie = function (req, res, next) {
@@ -102,6 +84,7 @@ controller.findProfileAndMatches = async function(req, res, next){
         console.log('in try block')
 
         //get profile by _id which is in the cookie
+
         const profileId = req.cookies.login;
         console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
@@ -115,7 +98,7 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         const artistsArray = artists;
 
-        console.log('artistsArray', artistsArray);
+        console.log('artistsArray LOOK HERE', artistsArray);
 
         //loop through artistsArray and find profiles that include these artists
         for (const artist in artistsArray){

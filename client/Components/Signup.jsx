@@ -17,7 +17,7 @@ const SignUp = () => {
     async function handleClick(e) {
       e.preventDefault();
       try {
-        const response = await fetch("/signup", {
+        const response = await fetch('/api/signup', {
           method: "POST",
           headers: {
             "content-type": "application/json",

@@ -20,8 +20,8 @@ const profileSchema = new Schema({
     password: {type: String, required: true},
     age: {type: String, required: true},
     bio: {type: String, required: true},
-    artists: {type: Object, required: true},
-    images: {type: Object, required: true}
+    artists: {type: Array, required: true},
+    images: {type: Object, required: false}
 })
 
 //later: profileSchema.pre to hash password

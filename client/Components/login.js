@@ -4,16 +4,6 @@
 import { BrowserRouter as Router, Route, Routes, useNavigate, Link } from 'react-router-dom';
 
 import React, { useState, useEffect } from "react";
-// import ReactDOM from 'react-dom/client';
-// import App from "./app.js"
-
-//components: login box; login modal
-//input boxes need to capture input values for fetch request
-
-//LoginBox is a presentational component which renders LoginModal (child component)
-
-//username: iLikeTarik
-//password: iAmNine
 
 const LoginBox = () => {
   return (
@@ -106,3 +96,14 @@ function LoginModal() {
 
 //EXPORT DEFAULTS HERE
 export default LoginBox;
+
+// import ReactDOM from 'react-dom/client';
+// import App from "./app.js"
+
+//components: login box; login modal
+//input boxes need to capture input values for fetch request
+
+//LoginBox is a presentational component which renders LoginModal (child component)
+
+//username: iLikeTarik
+//password: iAmNine

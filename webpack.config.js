@@ -2,15 +2,12 @@
 // const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const { env } = require("process");
-// console.log("ENVIRONMENT", process.env.NODE_ENV);
+
+console.log("ENVIRONMENT", process.env.NODE_ENV);
 
 module.exports = {
     mode: process.env.NODE_ENV, // NODE_ENV environment variable from package.json
-    entry: {
-        index:
-        "./client/index.js",
-    },
+    entry: "./client/index.js",
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.js",

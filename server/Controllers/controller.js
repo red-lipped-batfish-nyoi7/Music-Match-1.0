@@ -39,7 +39,6 @@ controller.createUser = async function(req, res, next){
 
         console.log('input', req.body)
         const existingProfile = await Profile.findOne({username: username})
-
         
         //if it doesn't add user
         if (existingProfile === null){
@@ -96,6 +95,8 @@ controller.createLoginCookie = function (req, res, next) {
 }
 
 controller.findProfileAndMatches = async function(req, res, next){
+
+    console.log("FIND PROFILE AND MATCHES");
 
     try{
         console.log('in try block')

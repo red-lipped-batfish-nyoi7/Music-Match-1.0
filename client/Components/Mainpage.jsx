@@ -9,12 +9,20 @@ import React, {useState, useEffect} from 'react';
 const MainPage = () => {    
     const [user, setUser] = useState([]);
     const [match, setMatch] = useState([]);
-    
-    useEffect(async () => {
-        let response = await fetch('/userprofile');
+
+    const effectFunc = async () => {
+        try {
+        let response = await fetch('/api/userprofile');
         let data  = await response.json();
         setUser(data.userProfile)
         setMatch(data.matchesProfiles[0])
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
+    useEffect(() => {
+        effectFunc();
     }, [])
 
     return (
@@ -79,7 +87,7 @@ const Profile =  (props) => {
         
 
         {/* <h1>{name}</h1> */}
-        <img class='round' src='https://play-lh.googleusercontent.com/TUtOJfxHm78ggM9Ssl2iAO2sDXeJ5rYauo_TTc9SiUsscHppl_TydsCwDoyZhfDv5qM'></img>
+        <img className='round' src='https://play-lh.googleusercontent.com/TUtOJfxHm78ggM9Ssl2iAO2sDXeJ5rYauo_TTc9SiUsscHppl_TydsCwDoyZhfDv5qM'></img>
         <div id='profile'>
         <p>Name: {name}</p>
         <p>Age: {age}</p>
@@ -111,7 +119,7 @@ const MatchProfile =  (props) => {
         
 
         {/* <h1>{name}</h1> */}
-        <img class='round' src='https://png.pngtree.com/png-clipart/20220101/ourmid/pngtree-3d-apple-fruit-red-illustration-png-image_4147443.png'></img>
+        <img className='round' src='https://png.pngtree.com/png-clipart/20220101/ourmid/pngtree-3d-apple-fruit-red-illustration-png-image_4147443.png'></img>
         <div id='profile'>
         <p>Name: {name}</p>
         <p>Age: {age}</p>

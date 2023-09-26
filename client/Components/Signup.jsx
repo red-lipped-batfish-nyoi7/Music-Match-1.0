@@ -16,7 +16,7 @@ const SignUp = () => {
     async function handleClick(e) {
       e.preventDefault();
       try {
-        const response = await fetch("/signup", {
+        const response = await fetch('/api/signup', {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -152,7 +152,7 @@ const SignUp = () => {
         />
       </div>
 
-      <form className="input-container" method ="post" enctype="multipart/form-data">
+      <form className="input-container" method ="post" encType="multipart/form-data">
         <label htmlFor="createImages" className="label">
           Upload Photos of Yourself
         </label>

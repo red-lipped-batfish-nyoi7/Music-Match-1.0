@@ -18,15 +18,15 @@ import React, { useState } from "react";
 function Login() {
   const navigate = useNavigate(); 
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3000/login/verify", {
+            const response = await fetch('/api/login/verify', {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ function Login() {
 
 
             if (response.status === 200) {
-                setMessage("Login successful!");
+                setMessage('Login successful!');
                 console.log('hello')
                 navigate ('/main');
                 console.log("Login successful", response.body);

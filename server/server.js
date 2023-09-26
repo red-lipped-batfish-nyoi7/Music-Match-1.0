@@ -20,27 +20,27 @@ app.use(cookieParser());
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
-app.get('/userprofile', controller.findProfileAndMatches, (req, res) => {
+app.get('/api/userprofile', controller.findProfileAndMatches, (req, res) => {
   res.status(200).json(res.locals.pageinfo);
 });
 
-app.post('/login/verify', 
+app.post('/api/login/verify', 
   controller.verifyUser, 
   controller.createLoginCookie,
   (req, res) => {
   res.status(200).json(res.locals.profile)
 })
 
-app.post('/signup', 
+app.post('/api/signup', 
   controller.createUser, 
-  controller.createLoginCookie, 
+  //controller.createLoginCookie, 
   (req, res) => {
   res.status(200).json(res.locals.profile)
 })
 
 
 
-
+// ERROR HANDLING
 app.use('*', (req, res, next) => {
     return next({
       log: 'Endpoint does not exist',

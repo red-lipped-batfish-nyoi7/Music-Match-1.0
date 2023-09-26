@@ -7,22 +7,18 @@ const { env } = require("process");
 
 module.exports = {
     mode: process.env.NODE_ENV, // NODE_ENV environment variable from package.json
-    entry: {
-        index:
-        "./client/index.js",
-    },
+    entry: "./client/index.js",
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.js",
         publicPath: '/' //used for base path for other assets
     },
     devServer: {
+        historyApiFallback: true,
         static: {
             publicPath: "/",
-            directory: path.join(__dirname, "/client"),
+            directory: path.resolve(__dirname, "client"),
         },
-        compress: true,
-        open: true,
         hot: true,
         port: 8080,
         proxy: {
@@ -31,7 +27,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'client/index.html'
+            title: 'Development',
+            template: './client/index.html'
         })
     ],
     // Other webpack configuration settings
@@ -41,10 +38,13 @@ module.exports = {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             use: {
-            loader: "babel-loader",
-            options: {
-                presets: ["@babel/react", "@babel/env"],
-            },
+              loader: "babel-loader",
+              options: {
+                presets: [ 
+                  "@babel/react", 
+                  "@babel/env"
+                ]
+              },
             },
         },
         {

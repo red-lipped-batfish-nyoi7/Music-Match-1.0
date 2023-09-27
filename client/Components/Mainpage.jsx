@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Profile from "./Profile.jsx";
 import MatchProfile from "./MatchProfile.jsx";
+import Messenger from './Messenger.jsx';
 
 //Main page should display:
     //your name
@@ -28,6 +29,7 @@ const MainPage = () => {
     }, [])
 
     return (
+     <>
     <div className="card-container">
         <div className="card left-card">
             <span className="profile"><Profile profileData={user} /></span>
@@ -38,6 +40,8 @@ const MainPage = () => {
             <span className="matches"><MatchProfile profileData={match} /></span>
         </div>
     </div>
+    <Messenger/>
+    </>
     )
 }
 

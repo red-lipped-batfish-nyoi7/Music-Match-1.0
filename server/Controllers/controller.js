@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const controller = {};
 
-controller.verifyUser = async function(req, res, next){
+controller.verifyUser = async function(req, res, next) {
 
     try {
 
@@ -49,7 +49,7 @@ controller.verifyUser = async function(req, res, next){
     
 }
 
-controller.createUser = async function(req, res, next){
+controller.createUser = async function(req, res, next) {
     
     try {
         
@@ -95,12 +95,21 @@ controller.createUser = async function(req, res, next){
 }
 
 controller.createLoginCookie = function (req, res, next) {
+
     const { _id } = res.locals.profile;
+
+    if (_id === undefined) return next({
+        log: 'Error at controller.createLoginCookie: res.locals.profile._id is missing.',
+        status: 500,
+        message: { err: 'Encountered unknown error at login.' }
+    });
+    
     res.cookie('login', _id);
     return next();
+
 }
 
-controller.findProfileAndMatches = async function(req, res, next){
+controller.findProfileAndMatches = async function(req, res, next) {
 
     try {
         //get profile by _id which is in the cookie

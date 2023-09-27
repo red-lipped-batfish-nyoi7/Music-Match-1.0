@@ -37,7 +37,6 @@ app.post('/api/signup',
 })
 
 
-
 // ERROR HANDLING
 app.use('*', (req, res, next) => {
     return next({

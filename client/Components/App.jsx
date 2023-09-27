@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import '../styles.scss';
 
 const App = () => {
+    
     return (
         <Routes>
             <Route path="/signup" element={<SignUp />} />

@@ -1,12 +1,7 @@
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
-// for Websockets / Messaging
-const http = require('http');
-const socketIo = require('socket.io');
-
 
 //require controller
 const controller = require('./Controllers/controller');
@@ -16,14 +11,15 @@ const PORT = 3000;
 
 // ALSO for Websockets / Messaging
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
-
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+app.get('/ws/', (req, res) => {
+  return res.status(200).send('this still works basic get')
+})
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 

@@ -3,14 +3,24 @@ const Profile = require('../Models/models.js');
 const controller = {};
 
 controller.verifyUser = async function(req, res, next){
+
+    const { username } = req.body;
     try{
         //find profile with same username 
-        const profile = await Profile.findOne({username: req.body.username});
-
+        const profile = await Profile.findOne({ username: username });
         console.log('found profile?..', profile)
 
         //if profile not found OR incorrect password, take to signup page
-        if (profile === null || profile.password !== req.body.password){
+        if (profile === null){
+            return next({
+                log: 'Incorrect username or password',
+                status: 400,
+                message: { err: 'Incorrect username or password' }
+            });
+        }
+
+        if (profile.password !== req.body.password){
+            // TO DO alert clinet pw was not correct
             return next({
                 log: 'Incorrect username or password',
                 status: 400,
@@ -18,11 +28,11 @@ controller.verifyUser = async function(req, res, next){
             });
         }
         //if everything is correct, send back the profile object
-        else{
-            res.locals.profile = profile;
-            return next();
-        }
-    } catch{
+  
+        res.locals.profile = profile;
+        return next();
+        
+    } catch (err) {
         return next({
             log: 'Error in verifyUser middleware',
             message: { err: 'Error in verifyUser middleware' }
@@ -30,18 +40,15 @@ controller.verifyUser = async function(req, res, next){
     }   
 }
 
+// CREATING A USER, ALSO CHECKS IF USERNAME ALREADY EXISTS
 controller.createUser = async function(req, res, next){
     try{
         const { username } = req.body;
         const { body } = req;
 
-        console.log('THIS IS BODY', body)
-
         const existingProfile = await Profile.findOne({username: username})
-        console.log('THIS ALREADY EXIST', existingProfile);
 
         if (existingProfile) {
-            console.log('I MADE IT IN')
             return next({
                   log: 'Username already exists',
                   status: 400, 
@@ -50,10 +57,8 @@ controller.createUser = async function(req, res, next){
         }
         
         const newProfile = await Profile.create(body);
-        console.log('await new profile', newProfile)
         res.locals.profile = newProfile;
         return next();
-
 
        } catch(err){
         //global error 
@@ -66,25 +71,16 @@ controller.createUser = async function(req, res, next){
 }
 
 controller.createLoginCookie = function (req, res, next) {
-    // console.log('made it to create cookie');
-    // console.log(res.locals);
-
     const { _id } = res.locals.profile;
-    
     res.cookie('login', _id);
-
     return next();
 }
 
 controller.findProfileAndMatches = async function(req, res, next){
 
-    console.log("FIND PROFILE AND MATCHES");
-
     try{
-        console.log('in try block')
 
         //get profile by _id which is in the cookie
-
         const profileId = req.cookies.login;
         console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
@@ -97,8 +93,6 @@ controller.findProfileAndMatches = async function(req, res, next){
         let matchesProfiles = [];
 
         const artistsArray = artists;
-
-        console.log('artistsArray LOOK HERE', artistsArray);
 
         //loop through artistsArray and find profiles that include these artists
         for (const artist in artistsArray){

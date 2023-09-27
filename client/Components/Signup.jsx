@@ -17,6 +17,7 @@ const SignUp = () => {
     async function handleClick(e) {
       e.preventDefault();
       try {
+        console.log('THIS IS NEW ARTIST ARR', newArtists)
         const response = await fetch('/api/signup', {
           method: "POST",
           headers: {
@@ -28,7 +29,7 @@ const SignUp = () => {
             password: newPassword,
             age: newAge, 
             bio: newBio,
-            artist: newArtists,
+            artists: newArtists,
             images: newImages
           }),
         })

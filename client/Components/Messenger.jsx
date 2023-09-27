@@ -28,12 +28,13 @@ const Messenger = () => {
         };
     }, []);
 
-    // if (socket) {
-    //   socket.on('message', (msg) => {
-    //     console.log('MESSAGE RECIEVED BY CLEINT', msg)
-    //    // setMessages([...messages, msg])
-    //   })
-    // }
+    if (socket) {
+      socket.onmessage = async (e) => {
+        const msg = await e.data.text();
+        console.log('MESSAGE RECIEVED BY CLEINT', msg)
+        setMessages([...messages, msg])
+      }
+    }
 
     const changeHandle = (e) => {
 

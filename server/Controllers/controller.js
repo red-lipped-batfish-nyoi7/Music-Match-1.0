@@ -105,9 +105,9 @@ controller.findProfileAndMatches = async function(req, res, next){
     try {
         //get profile by _id which is in the cookie
         const profileId = req.cookies.login;
-        console.log('profileId', profileId);
+        // console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
-        console.log('profile', profile);
+        // console.log('profile', profile);
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;

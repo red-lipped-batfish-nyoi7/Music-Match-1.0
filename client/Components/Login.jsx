@@ -1,6 +1,3 @@
-//this is the user login page
-//parent component: App (renders everything to the bundle)
-//App passes state to these components - what do we need state for?
 import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from "react";
 // import ReactDOM from 'react-dom/client';
@@ -34,20 +31,19 @@ function Login() {
                 body: JSON.stringify({ username, password }),
             })
 
-
             if (response.status === 200) {
                 setMessage('Login successful!');
-                console.log('hello')
+                // console.log('hello')
                 navigate ('/main');
-                console.log("Login successful", response.body);
+                // console.log("Login successful", response.body);
             }
             else {
                 const errorData = await response.json();
-                setMessage(`Login failed: ${errorData.message}`);
+                setMessage(`Login failed: ${errorData.err}`);
             }
 
         } catch (error) {
-            console.log('error login in')
+            // console.log('error login in')
             console.error("An error occurred:", error);
             setMessage("An error occurred while logging in.");
         }

@@ -1,26 +1,38 @@
-//this is the user login page
-//parent component: App (renders everything to the bundle)
-//App passes state to these components - what do we need state for?
+
 import { useNavigate, Link } from 'react-router-dom';
-import React, { useState } from "react";
-// import ReactDOM from 'react-dom/client';
-// import App from "./app.js"
+import React, { useState, useEffect } from "react";
 
-//components: login box; login modal
-//input boxes need to capture input values for fetch request
 
-//LoginBox is a presentational component which renders LoginModal (child component)
-
-//username: iLikeTarik
-//password: iAmNine
-
-//container component
 function Login() {
   const navigate = useNavigate(); 
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+
+
+  const wsContact  = () => {
+     const socket = new WebSocket('ws://localhost:3001/');
+
+     socket.onopen = () => {
+      console.log('websocket connection open')
+     }
+
+     socket.onmessage = (e) => {
+      console.log('message recieved', e.data)
+     }
+
+  }
+
+
+  useEffect(() => {
+    wsContact();
+  }, [])
+
+
+
+
 
     const handleLogin = async (e) => {
         e.preventDefault();

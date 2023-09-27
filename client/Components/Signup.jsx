@@ -47,7 +47,7 @@ const SignUp = () => {
             })
 
             if(response.status === 200){
-                console.log('hi')
+                // console.log('hi')
                 navigate ('/main');
             }
       

@@ -31,7 +31,7 @@ app.post('/api/login/verify',
 
 app.post('/api/signup', 
   controller.createUser, 
-  //controller.createLoginCookie, 
+  controller.createLoginCookie, 
   (req, res) => {
   res.status(200).json(res.locals.profile)
 })

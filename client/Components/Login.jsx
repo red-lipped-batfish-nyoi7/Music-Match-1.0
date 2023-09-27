@@ -1,6 +1,3 @@
-//this is the user login page
-//parent component: App (renders everything to the bundle)
-//App passes state to these components - what do we need state for?
 import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from "react";
 // import ReactDOM from 'react-dom/client';

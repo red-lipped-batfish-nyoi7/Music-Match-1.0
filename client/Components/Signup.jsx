@@ -15,32 +15,35 @@ const SignUp = () => {
   const [newArtists, setnewArtists] = useState([]);
 
     async function handleClick(e) {
-      e.preventDefault();
-      try {
-        const response = await fetch('/api/signup', {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            username: newUserName,
-            name: newName,
-            password: newPassword,
-            age: newAge, 
-            bio: newBio,
-            artist: newArtists,
-            images: newImages
-          }),
-        })
 
-        if(response.status === 200){
-            console.log('hi')
-            navigate ('/main');
-        }
+        // RESTRICT if newArtists.length < 3, then you can't post
+
+        e.preventDefault();
+        try {
+            const response = await fetch('/api/signup', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                username: newUserName,
+                name: newName,
+                password: newPassword,
+                age: newAge, 
+                bio: newBio,
+                artist: newArtists,
+                images: newImages
+            }),
+            })
+
+            if(response.status === 200){
+                console.log('hi')
+                navigate ('/main');
+            }
       
-    }catch(err){
-      console.log(err);
-    }
+        } catch(err){
+            console.log(err);
+        }
   }
 
   function handleChangeUser(e) {

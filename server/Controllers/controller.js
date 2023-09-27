@@ -8,7 +8,7 @@ controller.verifyUser = async function(req, res, next){
     try{
         //find profile with same username 
         const profile = await Profile.findOne({ username: username });
-        console.log('found profile?..', profile)
+        // console.log('found profile?..', profile)
 
         //if profile not found OR incorrect password, take to signup page
         if (profile === null){
@@ -82,9 +82,9 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         //get profile by _id which is in the cookie
         const profileId = req.cookies.login;
-        console.log('profileId', profileId);
+        // console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
-        console.log('profile', profile);
+        // console.log('profile', profile);
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
@@ -101,9 +101,9 @@ controller.findProfileAndMatches = async function(req, res, next){
             const query = {};
             query[newName] = { $exists: true };
             
-            console.log('query', query);
+            // console.log('query', query);
             const newMatch = await Profile.find(query);
-            console.log('newMatch', newMatch);
+            // console.log('newMatch', newMatch);
            
             matchesProfiles = matchesProfiles.concat(newMatch);
 
@@ -121,7 +121,7 @@ controller.findProfileAndMatches = async function(req, res, next){
 
         res.locals.pageinfo = {userProfile, matchesProfiles: filteredMatches}
 
-        console.log('pageinfo', res.locals.pageinfo);
+        // console.log('pageinfo', res.locals.pageinfo);
 
         return next();
 

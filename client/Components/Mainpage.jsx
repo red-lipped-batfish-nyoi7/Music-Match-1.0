@@ -12,6 +12,8 @@ import Messenger from './Messenger.jsx';
 const MainPage = () => {    
     const [user, setUser] = useState([]);
     const [match, setMatch] = useState([]);
+    const [userSid, setUserSid] = useState(null);
+    const [matchSid, setMatchSid] = useState(null);
 
     const effectFunc = async () => {
         try {
@@ -41,7 +43,7 @@ const MainPage = () => {
             <span className="matches"><MatchProfile profileData={match} /></span>
         </div>
     </div>
-    <Messenger user={user} match={match}/>
+    <Messenger user={user} match={match} matchSid={matchSid} userSid={userSid} setUserSid={setUserSid}/>
     </>
     )
 }

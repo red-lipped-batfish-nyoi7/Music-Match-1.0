@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const Messenger = (props) => {
+    const { setUserSid, userSid, matchSid, setMatchSid } =props
     const [messages, setMessages] = useState(['hi im a message', 'im anothermsg', 'yes another message'])
     const [text, setText] = useState('')
-    const [socket, setSocket] = useState(null)
+    const [socket, setSocket] = useState(null);
     
     console.log()
     //establishing connection
@@ -14,14 +15,18 @@ const Messenger = (props) => {
 
         const newSocket = new WebSocket('ws://localhost:3001', ['hi', 'bye']);
 
-        newSocket.onopen = () => {
-            console.log('WebSocket connection opened');
+        newSocket.onopen = (e) => {
+            console.log('WebSocket connection opened hi');
             setSocket(newSocket);
+            console.log('intial look for id', e)
             console.log('THIS IS THE SOCKET', newSocket);
         };
 
         newSocket.onmessage = (event) => {
             console.log('WebSocket connection opened', event.data);
+            const id = event.data
+            console.log('id val', id)
+            setUserSid(id);
         };
 
         newSocket.onclose = () => {
@@ -38,6 +43,10 @@ const Messenger = (props) => {
         const resp = await e.data;
         if (resp instanceof Blob){
         const msg = await resp.text();
+        // if (Number(msg)) {
+        //    props.setUserSid(msg)
+        //    console.log('should be ther users id', userSid)
+        // }
 
         console.log('MESSAGE RECIEVED BY CLEINT', msg)
         setMessages([...messages, msg])
@@ -54,10 +63,10 @@ const Messenger = (props) => {
 
     const clickHandle = async (e) => {
         e.preventDefault();
+        console.log('userSide when tryign to send', userSid)
         try {
             // sending a message using websocket
-             
-            socket.send(text)
+            socket.send(`${userSid}${text}`)
             setMessages([...messages, text])
 
            // await fetch();
@@ -69,6 +78,7 @@ const Messenger = (props) => {
         }
     }
 
+    console.log('user sid after setting', userSid);
 
 
     return(

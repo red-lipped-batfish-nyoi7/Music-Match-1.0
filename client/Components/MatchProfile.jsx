@@ -1,14 +1,12 @@
 import React from 'react';
 
-const MatchProfile = ({ profileData }) => { // presentational component
-    // console.log(profileData);
+const MatchProfile = ({profileData, matchList, setMatch, matchPointer, matchIncrement}) => { // presentational component
 
-    const profilePhoto = ''; //what is this coming back as? TBD
-    let {name, age, bio, artists} = profileData;
+    const {name, age, bio, artists = []} = profileData;
 
-    let people = ''
-    for(let artist in artists){
-        people = people + artist + "\n"
+    function nextClick() {
+        matchIncrement(matchPointer + 1);
+        setMatch(matchList[matchPointer]);
     }
 
     return (
@@ -17,10 +15,10 @@ const MatchProfile = ({ profileData }) => { // presentational component
         <div id='profile'>
             <p>Name: {name}</p>
             <p>Age: {age}</p>
-            <p>Favorite Artists: {people}</p>
-
+            <p>Favorite Artists: {artists.join(', ')}</p>
             <p>More About Myself: {bio}</p>
         </div>
+        <button className="cardButton">Chat with {name}</button> <button className="cardButton" onClick={nextClick}>Load New Match</button>
     </div>
     )
 }

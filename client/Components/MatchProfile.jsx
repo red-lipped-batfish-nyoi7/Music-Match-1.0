@@ -6,6 +6,8 @@ const MatchProfile = ({ profileData }) => { // presentational component
     const profilePhoto = ''; //what is this coming back as? TBD
     let {name, age, bio, artists} = profileData;
 
+    console.log('this is match profile data', profileData)
+
     let people = ''
     for(let artist in artists){
         people = people + artist + "\n"

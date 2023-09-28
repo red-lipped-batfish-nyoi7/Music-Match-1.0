@@ -6,9 +6,9 @@ const controller = {};
 controller.verifyUser = async function(req, res, next) {
 
     try {
-
+        
         const foundProfile = await Profile.findOne({username: req.body.username });
-
+        console.log(foundProfile)
         if (foundProfile === null) return next({
             log: 'At verifyUser: profile not found.',
             status: 400,
@@ -16,9 +16,8 @@ controller.verifyUser = async function(req, res, next) {
         }); 
 
         await foundProfile.bcryptVerify(req.body.password, function(err, verified) {
-                
             if (err) return next({
-                log: `Error at verifyUser: uncaught error in profile.bcryptVerify: ${err}`,
+                log: `Error at verifyUser: uncaught error in profile.bcryptVerify: `,
                 status: 500,
                 message: { err: `Encountered unknown error at login` }
             });
@@ -28,8 +27,9 @@ controller.verifyUser = async function(req, res, next) {
                 status: 400,
                 message: { err: 'Incorrect username or password.' }
             });
-
+            
             else {
+                console.log('made it into bcrypt verify')
                 res.locals.profile = foundProfile;
                 return next();
             }
@@ -95,8 +95,11 @@ controller.createUser = async function(req, res, next) {
 }
 
 controller.createLoginCookie = function (req, res, next) {
+    console.log('made it into cookie controoler', res.locals.profile._id)
 
-    const { _id } = res.locals.profile;
+    const { _id } = res.locals.profile
+
+    console.log('this is the id the cookie is set as')
 
     if (_id === undefined) return next({
         log: 'Error at controller.createLoginCookie: res.locals.profile._id is missing.',
@@ -116,11 +119,12 @@ controller.findProfileAndMatches = async function(req, res, next) {
         const profileId = req.cookies.login;
         // console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
-        // console.log('profile', profile);
+        console.log('profile', profile);
+        // profile.wsid = profile._id.valueOf();
+        // console.log('hopeully an updated id ', wsid)
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
-        const userProfile = {username, name, age, bio, artists};
        
         let matchesProfiles = [];
 
@@ -133,7 +137,8 @@ controller.findProfileAndMatches = async function(req, res, next) {
             const query = {};
             query[newName] = { $exists: true };
             
-            const newMatch = await Profile.find(query);           
+            const newMatch = await Profile.find(query); 
+            // newMatch.wsid = newMatch._id.valueOf();          
             matchesProfiles = matchesProfiles.concat(newMatch);
 
         };
@@ -148,7 +153,7 @@ controller.findProfileAndMatches = async function(req, res, next) {
             }
         }
 
-        res.locals.pageinfo = {userProfile, matchesProfiles: filteredMatches}
+        res.locals.pageinfo = {profile, matchesProfiles: filteredMatches}
 
         return next();
 

@@ -17,8 +17,9 @@ const MainPage = () => {
         try {
             const response = await fetch('/api/userprofile');
             const data  = await response.json();
-            setUser(data.userProfile)
+            setUser(data.profile)
             setMatch(data.matchesProfiles[0])
+           
         } catch (err) {
             console.log(err);
         }
@@ -40,7 +41,7 @@ const MainPage = () => {
             <span className="matches"><MatchProfile profileData={match} /></span>
         </div>
     </div>
-    <Messenger/>
+    <Messenger user={user} match={match}/>
     </>
     )
 }

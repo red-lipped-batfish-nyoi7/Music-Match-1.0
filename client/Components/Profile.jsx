@@ -4,7 +4,7 @@ const Profile =  ({ profileData }) => { // presentational component
     const profilePhoto = ''; //what is this coming back as? TBD
     let {name, age, bio, artists, images} = profileData;
 
-    // console.log(profileData);
+    console.log('THIS IS USER PROFILE DATA', profileData);
 
     // console.log(images)
 

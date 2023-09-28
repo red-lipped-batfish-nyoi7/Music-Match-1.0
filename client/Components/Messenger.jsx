@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-const Messenger = () => {
+const Messenger = (props) => {
     const [messages, setMessages] = useState(['hi im a message', 'im anothermsg', 'yes another message'])
     const [text, setText] = useState('')
     const [socket, setSocket] = useState(null)
-
+    
+    console.log()
     //establishing connection
     useEffect(() => {
-        const newSocket = new WebSocket('ws://localhost:3001');
+        if (props.user._id && props.match._id) {     
+           console.log('this is user id it should always be truthy', props.user._id)
+           console.log('this is match id it should always be truthy', props.match._id)
+
+        const newSocket = new WebSocket('ws://localhost:3001', ['hi', 'bye']);
 
         newSocket.onopen = () => {
             console.log('WebSocket connection opened');
@@ -25,14 +30,18 @@ const Messenger = () => {
 
         return () => {
             newSocket.close();
-        };
-    }, []);
+        };}
+    }, [props.user]);
 
     if (socket) {
       socket.onmessage = async (e) => {
-        const msg = await e.data.text();
+        const resp = await e.data;
+        if (resp instanceof Blob){
+        const msg = await resp.text();
+
         console.log('MESSAGE RECIEVED BY CLEINT', msg)
         setMessages([...messages, msg])
+        }
       }
     }
 

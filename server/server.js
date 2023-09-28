@@ -42,7 +42,10 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
 app.get('/api/userprofile', controller.findProfileAndMatches, (req, res) => {
-  console.log(`userProfile in server.js: ${res.locals.pageinfo.userProfile}`)
+
+  console.log(res.locals.pageinfo.userProfile);
+
+  // console.log(`userProfile in server.js: ${res.locals.pageinfo.userProfile}`)
   
   res.status(200).json(res.locals.pageinfo);
 });
@@ -79,7 +82,7 @@ app.post('/api/image', upload.single('image'), async (req, res) => {
 
   try {
     const buffer = await sharp(req.file.buffer)
-      .resize({ height: 1920, width: 1080, fit: 'contain' })
+      .resize({ height: 250, width: 250, fit: 'contain' })
       .toBuffer();
 
     const imageName = randomImageName();

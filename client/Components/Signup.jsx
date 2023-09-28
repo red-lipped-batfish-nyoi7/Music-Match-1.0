@@ -169,9 +169,9 @@ function handleChangeImages(e) { // what even is this??
             name="file[]"
             onChange={handleChangeImages}
             />
-    {newImages && (
+    {/* {newImages && (
     <img src={newImages} alt="Uploaded" />
-    )}
+    )} */}
         </form>
 
         <div className="input-container">

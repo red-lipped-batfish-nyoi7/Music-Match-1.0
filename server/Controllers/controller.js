@@ -119,8 +119,8 @@ controller.findProfileAndMatches = async function(req, res, next) {
         const profile = await Profile.findOne({_id: profileId});
 
         //store only the info that the frontend needs in a variable
-        const {username, name, age, bio, artists} = profile;
-        const userProfile = { username, name, age, bio, artists };
+        const {username, name, age, bio, artists, images } = profile;
+        const userProfile = { username, name, age, bio, artists, images };
        
         let matchesProfiles = [];
 

@@ -40,6 +40,7 @@ controller.verifyUser = async function(req, res, next){
     }   
 }
 
+
 // CREATING A USER, ALSO CHECKS IF USERNAME ALREADY EXISTS
 controller.createUser = async function(req, res, next){
     try{
@@ -101,7 +102,7 @@ controller.findProfileAndMatches = async function(req, res, next){
             const query = {};
             query[newName] = { $exists: true };
             
-            console.log('query', query);
+            // console.log('query', query);
             const newMatch = await Profile.find(query);
             console.log('newMatch', newMatch);
            

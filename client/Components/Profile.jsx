@@ -1,22 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Profile =  ({ profileData }) => { // presentational component
-    const profilePhoto = ''; //what is this coming back as? TBD
-    let {name, age, bio, artists, images} = profileData;
+const Profile =  ({profileData}) => { // presentational component
 
-    console.log('THIS IS USER PROFILE DATA', profileData);
 
-    // console.log(images)
+    const {name, age, bio, artists = []} = profileData;
 
-    // let people = Object.keys(props.inf.artists).join(', ')    
-    // console.log('arr', people)
-
-    let people = ''
-    for(let artist in artists){
-        people = people + artist + " "
-    }
-
-    // console.log('art', people)
 
     return (
     <div>    
@@ -24,8 +12,7 @@ const Profile =  ({ profileData }) => { // presentational component
         <div id='profile'>
             <p>Name: {name}</p>
             <p>Age: {age}</p>
-            <p>Favorite Artists: 
-                {people}</p>
+            <p>Favorite Artists: {artists.join(', ')} </p>
             <p>More About Myself: {bio}</p>
         </div>
     </div>

@@ -71,9 +71,9 @@ function Login() {
         Submit
       </button>
       <div>{message}</div>
-      <li>
+      <div>
         <Link to="/signup">Sign Up!</Link>
-      </li>
+      </div>
     </form>
   );
 }

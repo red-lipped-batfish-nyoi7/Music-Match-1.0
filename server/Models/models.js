@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 require('dotenv').config();
 
 const MONGO_URI = process.env.MONGO_URI;
-console.log('DATABASE TEST', MONGO_URI)
+// console.log('DATABASE TEST', MONGO_URI)
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -24,6 +25,34 @@ const profileSchema = new Schema({
     images: {type: Object, required: false}
 })
 
-//later: profileSchema.pre to hash password
+profileSchema.pre('save', function(next) {
+        
+        const newProfile = this;
+
+        try {
+            bcrypt.hash(newProfile.password, 10, function(err, hash) {
+                newProfile.password = hash;
+                return next();
+            })
+        }
+
+        catch(err) {
+            return next({
+                log: `Error at models.js/profileSchema.pre('save'): unknown error in bcrypt.hash try/catch block.`,
+                status: 500,
+                message: { err: `Unknown error at signup.` }
+            });
+        }
+        
+});
+
+profileSchema.methods.bcryptVerify = async function(inputPassword, controllerCallback) {
+    const thisProfile = this;
+        
+    bcrypt.compare(inputPassword, thisProfile.password, function(err, verified) {
+        if (err) return controllerCallback(err);
+        else return controllerCallback(null, verified);
+    });
+};
 
 module.exports = mongoose.model('Profile', profileSchema);

@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
-console.log("ENVIRONMENT", process.env.NODE_ENV);
+// console.log("ENVIRONMENT", process.env.NODE_ENV);
 
 module.exports = {
     mode: 'development', //process.env.NODE_ENV, // NODE_ENV environment variable from package.json

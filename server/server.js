@@ -43,6 +43,8 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
 app.get('/api/userprofile', controller.findProfileAndMatches, (req, res) => {
+  console.log(`userProfile in server.js: ${res.locals.pageinfo.userProfile}`)
+  
   res.status(200).json(res.locals.pageinfo);
 });
 
@@ -125,7 +127,6 @@ app.get('/api/getImage/:imageName', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while generating the URL' });
     }
 });
-
 
 
 

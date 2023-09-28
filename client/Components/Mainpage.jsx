@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Profile from "./Profile.jsx";
 import MatchProfile from "./MatchProfile.jsx";
+import Messenger from './Messenger.jsx';
+
+//Main page should display:
+    //your name
+    //your age
+    //your bio
+    //your artists
     
 const MainPage = () => {
 
     const [user, setUser] = useState([]);
     const [match, setMatch] = useState([]);
+    const [userSid, setUserSid] = useState(null);
+    const [matchSid, setMatchSid] = useState(null);
+
+//     const effectFunc = async () => {
+//         try {
+//             const response = await fetch('/api/userprofile');
+//             const data  = await response.json();
+//             setUser(data.profile)
+//             setMatch(data.matchesProfiles[0])
+           
+//         } catch (err) {
+//             console.log(err);
     const [matchList, loadMatches] = useState([]);
     const [matchPointer, matchIncrement] = useState(0);
     
@@ -29,7 +48,6 @@ const MainPage = () => {
             catch (err) {
                 console.log(err);
             }
-
         }
 
         effectFunc();
@@ -37,6 +55,7 @@ const MainPage = () => {
     }, []);
 
     return (
+     <>
     <div className="card-container">
         <div className="card left-card">
             <span className="profile">
@@ -57,6 +76,8 @@ const MainPage = () => {
             </span>
         </div>
     </div>
+    <Messenger user={user} match={match} matchSid={matchSid} userSid={userSid} setUserSid={setUserSid}/>
+    </>
     )
 }
 

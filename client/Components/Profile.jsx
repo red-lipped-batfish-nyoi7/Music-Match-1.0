@@ -7,6 +7,7 @@ const Profile =  ({profileData}) => { // presentational component
         console.log('IMAGES', images)
     })
 
+
     return (
     <div>    
         <img className='round' src={images} alt='Profile Image'/>

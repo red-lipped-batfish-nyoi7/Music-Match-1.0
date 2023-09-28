@@ -28,7 +28,6 @@ const s3 = new S3Client({
 
 //require controller
 const controller = require('./Controllers/controller');
-const imagecontroller = require('./Controllers/imagecontroller');
 
 const PORT = 3000;
 
@@ -98,7 +97,10 @@ app.post('/api/image', upload.single('image'), async (req, res) => {
     const response = await s3.send(command);
 
     if (response.$metadata.httpStatusCode === 200) {
-      return res.status(200).json({ message: 'Image uploaded successfully' });
+
+      const imageUrl = `https://${bucketName}.s3.amazonaws.com/${imageName}`;
+
+      return res.status(200).json({ message: 'Image uploaded successfully', imageUrl });
     } else {
       return res.status(500).json({ error: 'Failed to upload image to S3' });
     }

@@ -123,12 +123,20 @@ controller.findProfileAndMatches = async function(req, res, next) {
        
         let matchesProfiles = [];
 
+        // console.log(`artists: ${artists}`);
+        // console.log(`Array.isArray(artists): ${Array.isArray(artists)}`);
+
         //loop through artistsArray and find profiles that include these artists
         for (const artist in artists){
 
             const newName = `artists.${artist}`;
             const query = {};
             query[newName] = { $exists: true };
+
+            // const newQuery = await Profile.find({ artists: `${artist}` });
+            // console.log(`newQuery: ${newQuery}`);
+
+            // const newName = 
 
             console.log(`query: ${JSON.stringify(query)}`);
             

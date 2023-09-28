@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "NODE_ENV=development webpack-dev-server --open & NODE_ENV=development nodemon server/server.js"
+    "dev": "NODE_ENV=development webpack-dev-server --open & NODE_ENV=development nodemon server/server.js & nodemon server/wsServer.js"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +24,9 @@
     "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "watch": "^0.13.0"
+    "socket.io": "^4.7.2",
+    "watch": "^0.13.0",
+    "ws": "^8.14.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",

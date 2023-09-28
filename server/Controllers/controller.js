@@ -7,9 +7,9 @@ const controller = {};
 controller.verifyUser = async function(req, res, next) {
 
     try {
-
+        
         const foundProfile = await Profile.findOne({username: req.body.username });
-
+        console.log(foundProfile)
         if (foundProfile === null) return next({
             log: 'At verifyUser: profile not found.',
             status: 400,
@@ -17,9 +17,8 @@ controller.verifyUser = async function(req, res, next) {
         }); 
 
         await foundProfile.bcryptVerify(req.body.password, function(err, verified) {
-                
             if (err) return next({
-                log: `Error at verifyUser: uncaught error in profile.bcryptVerify: ${err}`,
+                log: `Error at verifyUser: uncaught error in profile.bcryptVerify: `,
                 status: 500,
                 message: { err: `Encountered unknown error at login` }
             });
@@ -29,8 +28,9 @@ controller.verifyUser = async function(req, res, next) {
                 status: 400,
                 message: { err: 'Incorrect username or password.' }
             });
-
+            
             else {
+                console.log('made it into bcrypt verify')
                 res.locals.profile = foundProfile;
                 return next();
             }
@@ -97,8 +97,11 @@ controller.createUser = async function(req, res, next) {
 }
 
 controller.createLoginCookie = function (req, res, next) {
+    console.log('made it into cookie controoler', res.locals.profile._id)
 
-    const { _id } = res.locals.profile;
+    const { _id } = res.locals.profile
+
+    console.log('this is the id the cookie is set as')
 
     if (_id === undefined) return next({
         log: 'Error at controller.createLoginCookie: res.locals.profile._id is missing.',

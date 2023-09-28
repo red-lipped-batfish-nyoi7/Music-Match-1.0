@@ -9,7 +9,7 @@ const Messenger = (props) => {
     console.log()
     //establishing connection
     useEffect(() => {
-        if (props.user._id && props.match._id) {     
+           
            console.log('this is user id it should always be truthy', props.user._id)
            console.log('this is match id it should always be truthy', props.match._id)
 
@@ -35,7 +35,7 @@ const Messenger = (props) => {
 
         return () => {
             newSocket.close();
-        };}
+        };
     }, [props.user]);
 
     if (socket) {

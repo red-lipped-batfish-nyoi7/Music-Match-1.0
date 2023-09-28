@@ -24,9 +24,7 @@ app.get('/ws/', (req, res) => {
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
-app.get('/api/userprofile', controller.findProfileAndMatches, (req, res) => {
-  console.log(`userProfile in server.js: ${res.locals.pageinfo.userProfile}`)
-  
+app.get('/api/userprofile', controller.findProfileAndMatches, (req, res) => {  
   res.status(200).json(res.locals.pageinfo);
 });
 

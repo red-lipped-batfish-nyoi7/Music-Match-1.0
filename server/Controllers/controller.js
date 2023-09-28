@@ -1,5 +1,6 @@
 const Profile = require('../Models/models.js');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 const controller = {};
 
@@ -123,52 +124,42 @@ controller.findProfileAndMatches = async function(req, res, next) {
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
         const userProfile = { username, name, age, bio, artists };
-
        
-        let matchesProfiles = [];
-
-        // console.log(`artists: ${artists}`);
-        // console.log(`Array.isArray(artists): ${Array.isArray(artists)}`);
-
         //loop through artistsArray and find profiles that include these artists
-        for (const artist in artists){
+        let matchesProfiles = [];
+        for (let i = 0; i < artists.length; i++) {
+            const newQuery = await Profile.find({ artists: { $all : [`${artists[i]}`] }});
+            matchesProfiles = matchesProfiles.concat(newQuery);
+        }
 
-            const newName = `artists.${artist}`;
-            const query = {};
-            query[newName] = { $exists: true };
-
-            // const newQuery = await Profile.find({ artists: `${artist}` });
-            // console.log(`newQuery: ${newQuery}`);
-
-            // const newName = 
-
-            console.log(`query: ${JSON.stringify(query)}`);
-            
-
-            const newMatch = await Profile.find(query);
-
-            matchesProfiles = matchesProfiles.concat(newMatch);
-
-        };
-
-        //remove duplicates from matchesProfiles
+        // Removes duplicates from the array of matches.
         const matchCache = {};
         const filteredMatches = [];
-        for(const match of matchesProfiles){
-            if(!matchCache.hasOwnProperty(match.username) && match.username !== username){
-                matchCache[match.username] = true;
-                filteredMatches.push(match);
+
+        for (let i = 0; i < matchesProfiles.length; i++) {
+            if(!matchCache.hasOwnProperty(matchesProfiles[i].username) && matchesProfiles[i].username !== username) {
+                matchCache[matchesProfiles[i]] = true;
+                filteredMatches.push(matchesProfiles[i]);
             }
         }
 
-        res.locals.pageinfo = {
-            userProfile: userProfile,
-            matchesProfiles: filteredMatches
+        function sortByShared(profileA, profileB) {
+
+            let aCounter = 0;
+            let bCounter = 0;
+
+            profileA.artists.forEach((ele) => { if (artists.includes(ele)) aCounter++; });
+            profileB.artists.forEach((ele) => { if (artists.includes(ele)) bCounter++; })
+
+            return bCounter - aCounter;
+
         }
 
+        // Sorts matches by most shared favorites to least shared favorites.
+        filteredMatches.sort(sortByShared);
 
+        res.locals.pageinfo = { userProfile: userProfile, matchesProfiles: filteredMatches }
         return next();
-
     }
     catch(err) {
         return next({

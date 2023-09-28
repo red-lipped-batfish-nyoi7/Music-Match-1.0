@@ -66,6 +66,7 @@ controller.createUser = async function(req, res, next) {
 
         try {
             const newProfile = new Profile(body);
+            console.log(`newProfile.artists: ${newProfile.artists}`)
             await newProfile.save();
             res.locals.profile = newProfile;
             return next();
@@ -114,26 +115,32 @@ controller.findProfileAndMatches = async function(req, res, next) {
     try {
         //get profile by _id which is in the cookie
         const profileId = req.cookies.login;
-        // console.log('profileId', profileId);
         const profile = await Profile.findOne({_id: profileId});
-        // console.log('profile', profile);
 
         //store only the info that the frontend needs in a variable
         const {username, name, age, bio, artists} = profile;
-        const userProfile = {username, name, age, bio, artists};
+        const userProfile = { username, name, age, bio, artists };
        
         let matchesProfiles = [];
 
-        const artistsArray = artists;
+        // console.log(`artists: ${artists}`);
+        // console.log(`Array.isArray(artists): ${Array.isArray(artists)}`);
 
         //loop through artistsArray and find profiles that include these artists
-        for (const artist in artistsArray){
+        for (const artist in artists){
 
             const newName = `artists.${artist}`;
             const query = {};
             query[newName] = { $exists: true };
+
+            // const newQuery = await Profile.find({ artists: `${artist}` });
+            // console.log(`newQuery: ${newQuery}`);
+
+            // const newName = 
+
+            console.log(`query: ${JSON.stringify(query)}`);
             
-            const newMatch = await Profile.find(query);           
+            const newMatch = await Profile.find(query);
             matchesProfiles = matchesProfiles.concat(newMatch);
 
         };
@@ -148,7 +155,10 @@ controller.findProfileAndMatches = async function(req, res, next) {
             }
         }
 
-        res.locals.pageinfo = {userProfile, matchesProfiles: filteredMatches}
+        res.locals.pageinfo = {
+            userProfile: userProfile,
+            matchesProfiles: filteredMatches
+        }
 
         return next();
 

@@ -58,6 +58,9 @@ const SignUp = () => {
 
     function handleAddArtist() {
         if(!newArtists.includes(artist) && newArtists.length < 10) {
+            // const artists = [...newArtists];
+            // artists.push(artists);
+            // setnewArtists(artists);
             setnewArtists(prev => [...prev, artist]);
         }
         setArtist('');

@@ -4,9 +4,11 @@ const MatchProfile = ({profileData, matchList, setMatch, matchPointer, matchIncr
 
     const {name, age, bio, artists = []} = profileData;
 
+
     function nextClick() {
         matchIncrement(matchPointer + 1);
         setMatch(matchList[matchPointer]);
+
     }
 
     return (

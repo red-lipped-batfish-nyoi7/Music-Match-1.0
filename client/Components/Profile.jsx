@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const Profile =  ({profileData}) => { // presentational component
 
+
     const {name, age, bio, artists = []} = profileData;
+
 
     return (
     <div>    
